@@ -2,6 +2,7 @@
 
 curl --request POST \
   --url http://localhost:8000/tgropweb/ROPRealTimeServices \
+  --header 'Authorization: Basic VEJfUk9QX0NPTTp0YnJvcGNvbTk5' \
   --header 'Content-Type: application/xml' \
   --header 'password: tbropcom99' \
   --header 'username: TB_ROP_COM' \
