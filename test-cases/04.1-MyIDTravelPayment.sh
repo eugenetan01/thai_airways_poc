@@ -1,14 +1,10 @@
 #!/bin/bash
 
-# Paths to your client certificate and key
-export CERT_PATH="../certs/ca.pem"
-
-curl --request POST \
-  --url "https://localhost:8443/MyIdTravel/PaymentInterfaceService" \
-  --cacert "$CERT_PATH" \
-  --header "Content-Type: application/xml" \
-  --header "User-Agent: sample-client/1.0" \
-  --data '<?xml version="1.0" encoding="UTF-8"?>
+curl --cacert ./certs/ca.pem -v https://localhost:8443/MyIdTravel/PaymentInterfaceService \
+  -H "Content-Type: application/xml" \
+  -H "User-Agent: sample-client/1.0" \
+  --data-binary @- <<EOF
+<?xml version="1.0" encoding="UTF-8"?>
 <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://service.payment.myidtravel.lhsystems.com">
   <soapenv:Header/>
   <soapenv:Body>
@@ -41,4 +37,5 @@ curl --request POST \
       <ser:Pnr>?</ser:Pnr>
     </ser:authorizePaymentRequestSchema>
   </soapenv:Body>
-</soapenv:Envelope>'
+</soapenv:Envelope>
+EOF
