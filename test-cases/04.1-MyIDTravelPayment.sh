@@ -4,7 +4,7 @@
 CERT_PATH="../certs/localhost.pem"
 
 curl --request POST \
-  --url "https://localhost:8000/MyIdTravel/PaymentInterfaceService" \
+  --url "https://localhost:8443/MyIdTravel/PaymentInterfaceService" \
   --cacert "$CERT_PATH" \
   --header "Content-Type: application/xml" \
   --header "User-Agent: sample-client/1.0" \

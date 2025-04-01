@@ -4,7 +4,7 @@
 CERT_PATH="../certs/localhost.pem"
 
 curl --request POST \
-  --url "http://localhost:8000/TG/API/Payment" \
+  --url "http://localhost:8443/TG/API/Payment" \
   --header "Content-Type: application/xml" \
   --header "User-Agent: sample-client/1.0" \
   --cacert "$CERT_PATH" \

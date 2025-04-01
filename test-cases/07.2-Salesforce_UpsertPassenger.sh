@@ -1,7 +1,7 @@
 #!/bin/bash
 
 curl --request POST \
-  --url https://localhost:8000/services/apexrest/UpsertPassenger \
+  --url http://localhost:8000/services/apexrest/UpsertPassenger \
   --header 'Authorization: Bearer 00D1y0000008qZg!AQEAQC.cJx6FbMquztcB12LbEohCTGNxlByjhWaZuqxtPx98ojgUG7EJHcNdCCzdwpBt6Q8VAKpC4tckCM6cyEXuEY7EK9i9' \
   --header 'Content-Type: application/json' \
   --header 'User-Agent: insomnia/10.3.1' \

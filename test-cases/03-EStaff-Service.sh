@@ -1,7 +1,7 @@
 #!/bin/bash
 
 curl --request POST \
-  --url "https://localhost:8000/Est/ESTService" \
+  --url "http://localhost:8000/Est/ESTService" \
   --header "User-Agent: sample-client/1.0" \
   --header "Content-Type: application/xml" \
   --data '<?xml version="1.0" encoding="UTF-8"?>
