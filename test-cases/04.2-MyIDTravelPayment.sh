@@ -1,6 +1,6 @@
 #!/bin/bash
 
-curl --cacert ./certs/ca.pem -v https://localhost:8443/TG/API/Payment \
+curl --cacert ../certs/ca.pem -v https://localhost:8443/TG/API/Payment \
   -H "Content-Type: application/xml" \
   -H "User-Agent: sample-client/1.0" \
   --data-binary @- <<EOF
