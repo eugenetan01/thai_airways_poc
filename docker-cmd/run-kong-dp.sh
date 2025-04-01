@@ -38,6 +38,8 @@ docker run -d \
   -e "KONG_UNTRUSTED_LUA=on" \
   -e "KONG_CLUSTER_DP_LABELS=created-by:quickstart,type:docker-linuxdockerOS" \
   -e "KONG_ROUTER_FLAVOR=expressions" \
+  -e "KONG_CLUSTER_RPC=on" \
+  -e KONG_ACTIVE_TRACING=on \
   -p 8000:8000 \
   -p 8443:8443 \
   kong/kong-gateway:3.10
