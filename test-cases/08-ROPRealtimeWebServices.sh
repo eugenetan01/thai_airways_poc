@@ -2,9 +2,10 @@
 
 curl --request POST \
   --url http://localhost:8000/tgropweb/ROPRealTimeServices \
-  --header 'Content-Type: text/xml; charset=utf-8' \
-  --data-binary @- <<EOF
-<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ws="http://ws.realtime.rop.thaiairways.com">
+  --header 'Content-Type: application/xml' \
+  --header 'password: tbropcom99' \
+  --header 'username: TB_ROP_COM' \
+  --data '<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ws="http://ws.realtime.rop.thaiairways.com">
   <soapenv:Header>
     <wsse:Security soapenv:mustUnderstand="1"
                    xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd"
@@ -27,5 +28,4 @@ curl --request POST \
       </getMainMemberProfileRQ>
     </ws:getMainMemberProfile>
   </soapenv:Body>
-</soapenv:Envelope>
-EOF
+</soapenv:Envelope>'
