@@ -1,0 +1,474 @@
+_format_version: "3.0"
+_konnect:
+  control_plane_name: thai-airways-poc
+certificates:
+  - cert: |-
+      -----BEGIN CERTIFICATE-----
+      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
+      -----END CERTIFICATE-----
+    id: 5e7969f3-450f-4fc2-af15-7575aed09fd1
+    key: |-
+      -----BEGIN PRIVATE KEY-----
+      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
+      91/Gf269XkCn4l4dt3GR+s7gs6c=
+      -----END PRIVATE KEY-----
+consumers:
+  - basicauth_credentials:
+      - password: 7432223e9cf19f7dc84e5ebfd370ba0eb58e35ad
+        username: CrewKitS_Rest
+    username: CrewKitS_Rest
+  - basicauth_credentials:
+      - password: aaae5c61b41cbfb225bbe1786f7e478597024c0c
+        username: tg_meal
+    username: MealsAPI
+  - basicauth_credentials:
+      - password: 200046caba3cdeda7710bad9d0bf87810085d7b7
+        username: bm_crm
+    username: bm_crm
+  - basicauth_credentials:
+      - password: 798431d7e62dd31aaf0dff5be471386371bb403b
+        username: demouser
+    username: eugene_consumer
+services:
+  - connect_timeout: 60000
+    enabled: true
+    host: dev-wsgw.thaiairways.com
+    name: Crewkit_FlightSchedule
+    plugins:
+      - config:
+          anonymous: null
+          hide_credentials: false
+          realm: service
+        enabled: true
+        name: basic-auth
+        protocols:
+          - grpc
+          - grpcs
+          - http
+          - https
+          - ws
+          - wss
+    port: 443
+    protocol: https
+    read_timeout: 60000
+    retries: 5
+    routes:
+      - https_redirect_status_code: 426
+        name: Crewkit_FlightSchedule
+        path_handling: v0
+        paths:
+          - /CrewKitServiceREST/services/FlightSchedule
+        preserve_host: false
+        protocols:
+          - http
+          - https
+        regex_priority: 0
+        request_buffering: true
+        response_buffering: true
+        strip_path: false
+    write_timeout: 60000
+  - connect_timeout: 60000
+    enabled: true
+    host: dev-wsgw.thaiairways.com
+    name: DCS_Listing_PAX_PDT
+    port: 80
+    protocol: http
+    read_timeout: 60000
+    retries: 5
+    routes:
+      - https_redirect_status_code: 426
+        name: DCS_Listing_PAX_PDT
+        path_handling: v0
+        paths:
+          - /pdt/DCSListingPax
+        plugins:
+          - config:
+              anonymous: null
+              hide_credentials: false
+              realm: service
+            enabled: true
+            name: basic-auth
+            protocols:
+              - grpc
+              - grpcs
+              - http
+              - https
+              - ws
+              - wss
+        preserve_host: false
+        protocols:
+          - http
+          - https
+        regex_priority: 0
+        request_buffering: true
+        response_buffering: true
+        strip_path: false
+    write_timeout: 60000
+  - connect_timeout: 60000
+    enabled: true
+    host: dev-wsgw.thaiairways.com
+    name: EStaff-Service
+    port: 443
+    protocol: https
+    read_timeout: 60000
+    retries: 5
+    routes:
+      - https_redirect_status_code: 426
+        name: EstaffService
+        path_handling: v0
+        paths:
+          - /Est/ESTService
+        preserve_host: false
+        protocols:
+          - http
+          - https
+        regex_priority: 0
+        request_buffering: true
+        response_buffering: true
+        strip_path: false
+    write_timeout: 60000
+  - connect_timeout: 60000
+    enabled: true
+    host: dev-wsgw.thaiairways.com
+    name: GetPassengerList
+    port: 443
+    protocol: https
+    read_timeout: 60000
+    retries: 5
+    routes:
+      - https_redirect_status_code: 426
+        name: GetPassengerList
+        path_handling: v0
+        paths:
+          - /pdt/1ASIWDA2TG
+        preserve_host: false
+        protocols:
+          - http
+          - https
+        regex_priority: 0
+        request_buffering: true
+        response_buffering: true
+        strip_path: false
+    write_timeout: 60000
+  - connect_timeout: 60000
+    enabled: true
+    host: dev-wsgw.thaiairways.com
+    name: Meals_API
+    port: 443
+    protocol: https
+    read_timeout: 60000
+    retries: 5
+    routes:
+      - https_redirect_status_code: 426
+        name: getMealList
+        path_handling: v0
+        paths:
+          - /getMealList
+        plugins:
+          - config:
+              anonymous: null
+              hide_credentials: false
+              realm: service
+            enabled: true
+            name: basic-auth
+            protocols:
+              - grpc
+              - grpcs
+              - http
+              - https
+              - ws
+              - wss
+        preserve_host: false
+        protocols:
+          - http
+          - https
+        regex_priority: 0
+        request_buffering: true
+        response_buffering: true
+        strip_path: false
+    write_timeout: 60000
+  - connect_timeout: 60000
+    enabled: true
+    host: dev-myidtravel.thaiairways.com
+    name: MyIDTravelPayment
+    port: 443
+    protocol: https
+    read_timeout: 60000
+    retries: 5
+    routes:
+      - https_redirect_status_code: 426
+        name: MyIDTravelPayment-PaymentInterface
+        path_handling: v0
+        paths:
+          - /MyIdTravel/PaymentInterfaceService
+        preserve_host: false
+        protocols:
+          - http
+          - https
+        regex_priority: 0
+        request_buffering: true
+        response_buffering: true
+        strip_path: false
+    write_timeout: 60000
+  - connect_timeout: 60000
+    enabled: true
+    host: dev-wsgw.thaiairways.com
+    name: MyIDTravelPayment-Payment
+    port: 80
+    protocol: http
+    read_timeout: 60000
+    retries: 5
+    routes:
+      - https_redirect_status_code: 426
+        name: MyIDTravelPayment-Payment
+        path_handling: v0
+        paths:
+          - /TG/API/Payment
+        preserve_host: false
+        protocols:
+          - http
+          - https
+        regex_priority: 0
+        request_buffering: true
+        response_buffering: true
+        strip_path: false
+    write_timeout: 60000
+  - connect_timeout: 60000
+    enabled: true
+    host: dev-wsgw.thaiairways.com
+    name: ROPRealtimeWebServices
+    port: 80
+    protocol: http
+    read_timeout: 60000
+    retries: 5
+    routes:
+      - https_redirect_status_code: 426
+        name: ROPRealtimeWebServices
+        path_handling: v0
+        paths:
+          - /tgropweb/ROPRealTimeServices
+        preserve_host: false
+        protocols:
+          - http
+          - https
+        regex_priority: 0
+        request_buffering: true
+        response_buffering: true
+        strip_path: false
+    write_timeout: 60000
+  - connect_timeout: 60000
+    enabled: true
+    host: dev-wsgw.thaiairways.com
+    name: TGPutAODBTGFlightUpdate
+    plugins:
+      - config:
+          access:
+            - "local function validate_payload()\n    local raw_body = kong.request.get_raw_body()\n
+              \   \n    -- Basic empty check\n    if not raw_body or raw_body == \"\" then\n
+              \       kong.response.exit(400, { message = \"Error: Invalid payload\" })\n
+              \   end\n\n    -- Validate basic structure using string patterns\n    local
+              valid = true\n    \n    -- Check outer SOAP structure\n    valid = valid and
+              raw_body:find(\"soapenv:Envelope\") ~= nil\n    valid = valid and raw_body:find(\"soapenv:Body\")
+              ~= nil\n    valid = valid and raw_body:find(\"inc:updateFlightInformation\")
+              ~= nil\n    \n    -- Check inner XML structure (escaped entities)\n    valid
+              = valid and raw_body:find(\"&lt;FlightScheduleUpdate&gt;\") ~= nil\n    valid
+              = valid and raw_body:find(\"&lt;HeaderData&gt;\") ~= nil\n    valid = valid
+              and raw_body:find(\"&lt;MessageData&gt;\") ~= nil\n    \n    -- Check required
+              fields (escaped entities)\n    valid = valid and raw_body:find(\"&lt;ADID&gt;\")
+              ~= nil\n    valid = valid and raw_body:find(\"&lt;FLNO&gt;\") ~= nil\n    valid
+              = valid and raw_body:find(\"&lt;STOAD&gt;\") ~= nil\n    valid = valid and
+              raw_body:find(\"&lt;STOAT&gt;\") ~= nil\n    valid = valid and raw_body:find(\"&lt;ATYP&gt;\")
+              ~= nil\n    valid = valid and raw_body:find(\"&lt;PSTA&gt;\") ~= nil\n    valid
+              = valid and raw_body:find(\"&lt;PABSD&gt;\") ~= nil\n    valid = valid and
+              raw_body:find(\"&lt;PABST&gt;\") ~= nil\n    valid = valid and raw_body:find(\"&lt;PAESD&gt;\")
+              ~= nil\n    valid = valid and raw_body:find(\"&lt;PAEST&gt;\") ~= nil\n    valid
+              = valid and raw_body:find(\"&lt;URNO&gt;\") ~= nil\n\n    if not valid then\n
+              \       kong.response.exit(400, { message = \"Error: Invalid payload structure\"
+              })\n    end\nend\n\nvalidate_payload()"
+          body_filter: []
+          certificate: []
+          functions: []
+          header_filter: []
+          log: []
+          rewrite: []
+          ws_client_frame: []
+          ws_close: []
+          ws_handshake: []
+          ws_upstream_frame: []
+        enabled: true
+        instance_name: XML-Validate
+        name: pre-function
+        protocols:
+          - grpc
+          - grpcs
+          - http
+          - https
+    port: 80
+    protocol: http
+    read_timeout: 60000
+    retries: 5
+    routes:
+      - https_redirect_status_code: 426
+        name: TGPutAODBTGFlightUpdate
+        path_handling: v0
+        paths:
+          - /TG_PutAODBTGFlightUpdate
+        preserve_host: false
+        protocols:
+          - http
+          - https
+        regex_priority: 0
+        request_buffering: true
+        response_buffering: true
+        strip_path: false
+    write_timeout: 60000
+  - connect_timeout: 60000
+    enabled: true
+    host: dev-wsgw.thaiairways.com
+    name: salesforce-api
+    port: 443
+    protocol: https
+    read_timeout: 60000
+    retries: 5
+    routes:
+      - https_redirect_status_code: 426
+        name: CRM_SalesforceLogin
+        path_handling: v0
+        paths:
+          - /services/oauth2/token
+        plugins:
+          - config:
+              anonymous: null
+              hide_credentials: false
+              realm: service
+            enabled: true
+            name: basic-auth
+            protocols:
+              - grpc
+              - grpcs
+              - http
+              - https
+              - ws
+              - wss
+        preserve_host: false
+        protocols:
+          - http
+          - https
+        regex_priority: 0
+        request_buffering: true
+        response_buffering: true
+        strip_path: false
+      - https_redirect_status_code: 426
+        name: CRM_Salesforce_UpsertPassenger
+        path_handling: v0
+        paths:
+          - /services/apexrest/UpsertPassenger
+        preserve_host: false
+        protocols:
+          - http
+          - https
+        regex_priority: 0
+        request_buffering: true
+        response_buffering: true
+        strip_path: false
+    write_timeout: 60000
+  - connect_timeout: 60000
+    enabled: true
+    host: httpbin.org
+    name: sample-api
+    path: /anything
+    port: 443
+    protocol: https
+    read_timeout: 60000
+    retries: 5
+    routes:
+      - https_redirect_status_code: 426
+        name: sample-api-endpoint
+        path_handling: v0
+        paths:
+          - /kong/thaiairways
+        preserve_host: false
+        protocols:
+          - http
+          - https
+        regex_priority: 0
+        request_buffering: true
+        response_buffering: true
+        strip_path: true
+    write_timeout: 60000
