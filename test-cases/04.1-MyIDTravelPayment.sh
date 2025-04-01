@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Paths to your client certificate and key
-CERT_PATH="../certs/ca.pem"
+export CERT_PATH="../certs/ca.pem"
 
 curl --request POST \
   --url "https://localhost:8443/MyIdTravel/PaymentInterfaceService" \
