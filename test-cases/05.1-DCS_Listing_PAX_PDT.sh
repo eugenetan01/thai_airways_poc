@@ -1,17 +1,9 @@
 #!/bin/bash
 
-# Basic Auth credentials
-USERNAME="bm_crm"
-PASSWORD="TG50_cRM_BBm"
-
-# Endpoint
-# URL="http://dev-wsgw.thaiairways.com/pdt/DCSListingPax"
-
-# Send SOAP request using curl
 curl --request POST \
-  --url "http://localhost:8000/pdt/DCSListingPax" \
-  --header "Content-Type: text/xml" \
-  --user "$USERNAME:$PASSWORD" \
+  --url http://localhost:8000/pdt/DCSListingPax \
+  --header 'Authorization: Basic Ym1fY3JtOlRHNTBfY1JNX0JCbQ==' \
+  --header 'Content-Type: application/xml' \
   --data '<?xml version="1.0" encoding="UTF-8"?>
 <soapenv:Envelope xmlns:head="http://xml.accenture.com/common/header" xmlns:pax="http://xml.thaiairways.com/dcs/listing/pax" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:v1="http://xml.thaiairways.com/dcs/listing/pax/getpaxlistbyflight/v1_0">
   <soapenv:Header>
