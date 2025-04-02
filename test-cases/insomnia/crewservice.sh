@@ -1,6 +1,6 @@
 #!/bin/bash
 
-curl --request POST \
+curl -v --request POST \
   --url 'http://tsqdev.thaiairways.com/CrewKitServiceREST/services?FltLocalDateFrom=01OCT24&FltLocalDateTo=01OCT24' \
   --header 'Authorization: Basic Q3Jld0tpdFNfUmVzdDpjS3NSQDMwMDU=' \
   --header 'Content-Type: application/json' \
