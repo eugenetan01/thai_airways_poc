@@ -20,70 +20,16 @@ jobs:
         with:
           node-version: "16"
 
-      #- name: Install soap-converter
-      #  run: |
-      #    npm install -g soap-converter
-
-      #- name: Convert WSDL to OpenAPI
-      #  run: |
-      #    soap-converter -i ./wsdl/tgropweb_ROPWebServicesService_ROPRealTimeServicesService_ROPRealTimeServicesService.wsdl \
-      #      -t OpenAPI \
-      #      -v 3.1 \
-      #      -o openapi.yaml
-
-      - name: Install dependencies
+      - name: Install soap-converter
         run: |
-          npm init -y
-          npm install apiconnect-wsdl@1.6.43 xml2js@0.6.2
+          npm install -g soap-converter@0.2.1
 
       - name: Convert WSDL to OpenAPI
         run: |
-          node -e "
-          const fs = require('fs');
-          const apicWsdl = require('apiconnect-wsdl');
-          const { parseString } = require('xml2js');
-
-          const wsdlContent = fs.readFileSync('./wsdl/tgropweb_ROPWebServicesService_ROPRealTimeServicesService_ROPRealTimeServicesService.wsdl');
-
-          parseString(wsdlContent, { explicitArray: false, ignoreAttrs: false }, async (err, result) => {
-              if (err) throw err;
-
-              // Extract service details with proper namespace handling
-              const service = result.definitions.service;
-              const serviceName = service.$.name;
-              const port = service.port;
-              const serverUrl = port['soap:address'].$.location;
-
-              try {
-                  const conversion = await.apicWsdl.create(
-                      wsdlContent,
-                      serviceName,
-                      'converted-api',
-                      {
-                          type: 'wsdl',
-                          openapiVersion: '3.0',
-                          defaults: {
-                              title: serviceName,
-                              servers: [{ url: serverUrl }],
-                              'x-ibm-configuration': {
-                                  cors: { enabled: false }
-                              }
-                          }
-                      }
-                  );
-
-                  fs.writeFileSync('openapi.yaml', conversion.openapi);
-                  console.log('Conversion successful');
-              } catch (e) {
-                  console.error('Conversion failed:', e);
-                  process.exit(1);
-              }
-          });"
-      # Install Deck using official action
-      - name: Setup decK
-        uses: kong/setup-deck@v1
-        with:
-          version: "1.40.2"
+          soap-converter -i ./wsdl/tgropweb_ROPWebServicesService_ROPRealTimeServicesService_ROPRealTimeServicesService.wsdl \
+            -t OpenAPI \
+            -v 2.0 \
+            -o openapi.yaml
 
       # Convert OpenAPI specs to DecK
       - name: Generate Kong declarative configuration from Spec
