@@ -18,10 +18,12 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: "16"
+          node-version: "18"
 
       - name: Install soap-converter
-        run: npm install -g soap-converter
+        run: |
+          npm install untildify@4.0.0
+          npm install -g soap-converter
 
       - name: Convert WSDL to OpenAPI
         run: |
