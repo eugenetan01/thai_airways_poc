@@ -18,31 +18,73 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: "18.x"
+          node-version: "16"
 
-      - name: Install soap-converter
+      #- name: Install soap-converter
+      #  run: |
+      #    npm install -g soap-converter
+
+      #- name: Convert WSDL to OpenAPI
+      #  run: |
+      #    soap-converter -i ./wsdl/tgropweb_ROPWebServicesService_ROPRealTimeServicesService_ROPRealTimeServicesService.wsdl \
+      #      -t OpenAPI \
+      #      -v 3.1 \
+      #      -o openapi.yaml
+
+      - name: Install dependencies
         run: |
-          # Force install specific CommonJS-compatible dependency versions
-          npm install -g soap-converter@0.3.0 \
-            --legacy-peer-deps \
-            --omit=optional \
-            --force \
-            --ignore-scripts
+          npm install -g apiconnect-wsdl@5.0.7 xml2js@0.6.2
 
-          # Patch untildify in global install location
-          find $(npm root -g)/soap-converter -type f -exec sed -i "s/require('untildify')/require('untildify\/cjs')/g" {} \;
-
-          # Install CommonJS version of problematic dependency
-          npm install -g untildify@4.0.0
-
-      - name: Convert WSDL to OpenAPI
+      - name: Convert WSDL to OpenAPI with auto-discovery
         run: |
-          NODE_OPTIONS="--experimental-vm-modules --no-experimental-fetch" \
-          soap-converter -i ./wsdl/tgropweb_ROPWebServicesService_ROPRealTimeServicesService_ROPRealTimeServicesService.wsdl \
-            -t OpenAPI \
-            -v 3.1 \
-            -o openapi.yaml
+          node -e "
+          const fs = require('fs');
+          const apicWsdl = require('apiconnect-wsdl');
+          const { parseString } = require('xml2js');
 
+          // Read WSDL file
+          const wsdlContent = fs.readFileSync('./wsdl/tgropweb_ROPWebServicesService_ROPRealTimeServicesService_ROPRealTimeServicesService.wsdl');
+
+          // Parse WSDL to extract service details
+          parseString(wsdlContent, async (err, result) => {
+            if (err) throw err;
+
+            const service = result.definitions.service[0];
+            const serviceName = service.$.name;
+            const port = service.port[0];
+            const serverUrl = port.address[0].$.location;
+
+            // Generate OpenAPI with discovered values
+            try {
+              const conversion = await apicWsdl.create(
+                wsdlContent,
+                serviceName,
+                'converted-api',
+                {
+                  type: 'wsdl',
+                  openapiVersion: '3.0',
+                  defaults: {
+                    title: serviceName,
+                    servers: [{ url: serverUrl }],
+                    'x-ibm-configuration': {
+                      enforced: true,
+                      cors: {
+                        enabled: false,
+                        origin: '*',
+                        methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'HEAD']
+                      }
+                    }
+                  }
+                }
+              );
+
+              fs.writeFileSync('openapi.yaml', conversion.openapi);
+              console.log('Successfully converted WSDL to OpenAPI 3.0');
+            } catch (e) {
+              console.error('Conversion failed:', e);
+              process.exit(1);
+            }
+          });"
       # Install Deck using official action
       - name: Setup decK
         uses: kong/setup-deck@v1
