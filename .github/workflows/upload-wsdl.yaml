@@ -23,8 +23,7 @@ jobs:
       - name: Install soap-converter
         run: |
           npm install -g soap-converter
-          cd /usr/local/lib/node_modules/soap-converter
-          npm install untildify@4.0.0
+          npm install -g untildify@4.0.0
 
       - name: Convert WSDL to OpenAPI
         run: |
