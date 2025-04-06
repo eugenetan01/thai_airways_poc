@@ -20,17 +20,24 @@ jobs:
         with:
           node-version: "18.x"
 
-      - name: Run install
-        uses: borales/actions-yarn@v4
-        with:
-          cmd: install # will run `yarn install` command
-
       - name: Install soap-converter
         run: |
-          yarn global add soap-converter
+          # Force install specific CommonJS-compatible dependency versions
+          npm install -g soap-converter@0.3.0 \
+            --legacy-peer-deps \
+            --omit=optional \
+            --force \
+            --ignore-scripts
+
+          # Patch untildify in global install location
+          find $(npm root -g)/soap-converter -type f -exec sed -i "s/require('untildify')/require('untildify\/cjs')/g" {} \;
+
+          # Install CommonJS version of problematic dependency
+          npm install -g untildify@4.0.0
 
       - name: Convert WSDL to OpenAPI
         run: |
+          NODE_OPTIONS="--experimental-vm-modules --no-experimental-fetch" \
           soap-converter -i ./wsdl/tgropweb_ROPWebServicesService_ROPRealTimeServicesService_ROPRealTimeServicesService.wsdl \
             -t OpenAPI \
             -v 3.1 \
