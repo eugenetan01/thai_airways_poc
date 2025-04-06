@@ -36,55 +36,48 @@ jobs:
           npm init -y
           npm install apiconnect-wsdl@1.6.43 xml2js@0.6.2
 
-      - name: Convert WSDL to OpenAPI with auto-discovery
+      - name: Convert WSDL to OpenAPI
         run: |
           node -e "
           const fs = require('fs');
           const apicWsdl = require('apiconnect-wsdl');
           const { parseString } = require('xml2js');
 
-          // Read WSDL file
           const wsdlContent = fs.readFileSync('./wsdl/tgropweb_ROPWebServicesService_ROPRealTimeServicesService_ROPRealTimeServicesService.wsdl');
 
-          // Parse WSDL to extract service details
-          parseString(wsdlContent, async (err, result) => {
-            if (err) throw err;
+          parseString(wsdlContent, { explicitArray: false, ignoreAttrs: false }, async (err, result) => {
+              if (err) throw err;
 
-            const service = result.definitions.service[0];
-            const serviceName = service.$.name;
-            const port = service.port[0];
-            const serverUrl = port.address[0].$.location;
+              // Extract service details with proper namespace handling
+              const service = result.definitions.service;
+              const serviceName = service.$.name;
+              const port = service.port;
+              const serverUrl = port['soap:address'].$.location;
 
-            // Generate OpenAPI with discovered values
-            try {
-              const conversion = await apicWsdl.create(
-                wsdlContent,
-                serviceName,
-                'converted-api',
-                {
-                  type: 'wsdl',
-                  openapiVersion: '3.0',
-                  defaults: {
-                    title: serviceName,
-                    servers: [{ url: serverUrl }],
-                    'x-ibm-configuration': {
-                      enforced: true,
-                      cors: {
-                        enabled: false,
-                        origin: '*',
-                        methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'HEAD']
+              try {
+                  const conversion = await apicWsdl.create(
+                      wsdlContent,
+                      serviceName,
+                      'converted-api',
+                      {
+                          type: 'wsdl',
+                          openapiVersion: '3.0',
+                          defaults: {
+                              title: serviceName,
+                              servers: [{ url: serverUrl }],
+                              'x-ibm-configuration': {
+                                  cors: { enabled: false }
+                              }
+                          }
                       }
-                    }
-                  }
-                }
-              );
+                  );
 
-              fs.writeFileSync('openapi.yaml', conversion.openapi);
-              console.log('Successfully converted WSDL to OpenAPI 3.0');
-            } catch (e) {
-              console.error('Conversion failed:', e);
-              process.exit(1);
-            }
+                  fs.writeFileSync('openapi.yaml', conversion.openapi);
+                  console.log('Conversion successful');
+              } catch (e) {
+                  console.error('Conversion failed:', e);
+                  process.exit(1);
+              }
           });"
       # Install Deck using official action
       - name: Setup decK
