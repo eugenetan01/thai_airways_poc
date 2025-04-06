@@ -18,12 +18,12 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: "18"
+          node-version: "18.19.1"
 
       - name: Install soap-converter
         run: |
-          npm install -g soap-converter
-          npm install -g untildify@4.0.0
+          npm install -g soap-converter@3.2.1 # Last known CommonJS-compatible version
+          npm install -g @apidevtools/swagger-cli@4.0.4
 
       - name: Convert WSDL to OpenAPI
         run: |
