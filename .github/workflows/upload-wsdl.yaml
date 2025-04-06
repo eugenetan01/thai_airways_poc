@@ -55,7 +55,7 @@ jobs:
               const serverUrl = port['soap:address'].$.location;
 
               try {
-                  const conversion = await apicWsdl.create(
+                  const conversion = await.apicWsdl.create(
                       wsdlContent,
                       serviceName,
                       'converted-api',
