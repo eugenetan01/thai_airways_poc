@@ -33,7 +33,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          npm install -g apiconnect-wsdl@1.6.43 xml2js@0.6.2
+          npm install -g apiconnect-wsdl xml2js
 
       - name: Convert WSDL to OpenAPI with auto-discovery
         run: |
