@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions name="ROPRealTimeServicesService" targetNamespace="http://ws.realtime.rop.thaiairways.com" xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://ws.realtime.rop.thaiairways.com" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:wsp1_2="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <types>
+  </types>
+  <message name="getMainMemberProfile">
+    <part name="getMainMemberProfileRQ" type="xsd:string">
+    </part>
+  </message>
+  <message name="getMainMemberProfileResponse">
+    <part name="getMainMemberProfileReturn" type="xsd:string">
+    </part>
+  </message>
+  <message name="updateAdditionalMemberProfile">
+    <part name="updateAdditionalMemberProfileRQ" type="xsd:string">
+    </part>
+  </message>
+  <message name="updateAdditionalMemberProfileResponse">
+    <part name="updateAdditionalMemberProfileReturn" type="xsd:string">
+    </part>
+  </message>
+  <message name="updateMemberProfile">
+    <part name="updateMemberProfileRQ" type="xsd:string">
+    </part>
+  </message>
+  <message name="updateMemberProfileResponse">
+    <part name="updateMemberProfileReturn" type="xsd:string">
+    </part>
+  </message>
+  <message name="getAdditionalMemberProfile">
+    <part name="getAdditionalMemberProfileRQ" type="xsd:string">
+    </part>
+  </message>
+  <message name="getAdditionalMemberProfileResponse">
+    <part name="getAdditionalMemberProfileReturn" type="xsd:string">
+    </part>
+  </message>
+  <message name="enrollROPMember">
+    <part name="enrollROPMemberRQ" type="xsd:string">
+    </part>
+  </message>
+  <message name="enrollROPMemberResponse">
+    <part name="enrollROPMemberReturn" type="xsd:string">
+    </part>
+  </message>
+  <portType name="ROPRealTimeServices">
+    <operation name="getMainMemberProfile">
+      <input message="tns:getMainMemberProfile" wsam:Action="http://ws.realtime.rop.thaiairways.com/ROPRealTimeServices/getMainMemberProfileRequest">
+    </input>
+      <output message="tns:getMainMemberProfileResponse" wsam:Action="http://ws.realtime.rop.thaiairways.com/ROPRealTimeServices/getMainMemberProfileResponse">
+    </output>
+    </operation>
+    <operation name="updateAdditionalMemberProfile">
+      <input message="tns:updateAdditionalMemberProfile" wsam:Action="http://ws.realtime.rop.thaiairways.com/ROPRealTimeServices/updateAdditionalMemberProfileRequest">
+    </input>
+      <output message="tns:updateAdditionalMemberProfileResponse" wsam:Action="http://ws.realtime.rop.thaiairways.com/ROPRealTimeServices/updateAdditionalMemberProfileResponse">
+    </output>
+    </operation>
+    <operation name="updateMemberProfile">
+      <input message="tns:updateMemberProfile" wsam:Action="http://ws.realtime.rop.thaiairways.com/ROPRealTimeServices/updateMemberProfileRequest">
+    </input>
+      <output message="tns:updateMemberProfileResponse" wsam:Action="http://ws.realtime.rop.thaiairways.com/ROPRealTimeServices/updateMemberProfileResponse">
+    </output>
+    </operation>
+    <operation name="getAdditionalMemberProfile">
+      <input message="tns:getAdditionalMemberProfile" wsam:Action="http://ws.realtime.rop.thaiairways.com/ROPRealTimeServices/getAdditionalMemberProfileRequest">
+    </input>
+      <output message="tns:getAdditionalMemberProfileResponse" wsam:Action="http://ws.realtime.rop.thaiairways.com/ROPRealTimeServices/getAdditionalMemberProfileResponse">
+    </output>
+    </operation>
+    <operation name="enrollROPMember">
+      <input message="tns:enrollROPMember" wsam:Action="http://ws.realtime.rop.thaiairways.com/ROPRealTimeServices/enrollROPMemberRequest">
+    </input>
+      <output message="tns:enrollROPMemberResponse" wsam:Action="http://ws.realtime.rop.thaiairways.com/ROPRealTimeServices/enrollROPMemberResponse">
+    </output>
+    </operation>
+  </portType>
+  <binding name="ROPRealTimeServicesBinding" type="tns:ROPRealTimeServices">
+    <soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <operation name="getMainMemberProfile">
+      <soap:operation soapAction=""/>
+      <input>
+        <soap:body use="literal" namespace="http://ws.realtime.rop.thaiairways.com"/>
+      </input>
+      <output>
+        <soap:body use="literal" namespace="http://ws.realtime.rop.thaiairways.com"/>
+      </output>
+    </operation>
+    <operation name="updateAdditionalMemberProfile">
+      <soap:operation soapAction=""/>
+      <input>
+        <soap:body use="literal" namespace="http://ws.realtime.rop.thaiairways.com"/>
+      </input>
+      <output>
+        <soap:body use="literal" namespace="http://ws.realtime.rop.thaiairways.com"/>
+      </output>
+    </operation>
+    <operation name="updateMemberProfile">
+      <soap:operation soapAction=""/>
+      <input>
+        <soap:body use="literal" namespace="http://ws.realtime.rop.thaiairways.com"/>
+      </input>
+      <output>
+        <soap:body use="literal" namespace="http://ws.realtime.rop.thaiairways.com"/>
+      </output>
+    </operation>
+    <operation name="getAdditionalMemberProfile">
+      <soap:operation soapAction=""/>
+      <input>
+        <soap:body use="literal" namespace="http://ws.realtime.rop.thaiairways.com"/>
+      </input>
+      <output>
+        <soap:body use="literal" namespace="http://ws.realtime.rop.thaiairways.com"/>
+      </output>
+    </operation>
+    <operation name="enrollROPMember">
+      <soap:operation soapAction=""/>
+      <input>
+        <soap:body use="literal" namespace="http://ws.realtime.rop.thaiairways.com"/>
+      </input>
+      <output>
+        <soap:body use="literal" namespace="http://ws.realtime.rop.thaiairways.com"/>
+      </output>
+    </operation>
+  </binding>
+  <service name="ROPRealTimeServicesService">
+    <port name="ROPRealTimeServices" binding="tns:ROPRealTimeServicesBinding">
+      <soap:address location="http://57.59.37.29:80/tgropweb/ROPRealTimeServices"/>
+    </port>
+  </service>
+</definitions>

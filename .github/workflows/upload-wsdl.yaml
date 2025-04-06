@@ -1,0 +1,64 @@
+name: WSDL to Kong Deployment with soap-converter
+
+on:
+  push:
+    branches:
+      - dev
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  convert-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "18"
+
+      - name: Install soap-converter
+        run: npm install -g soap-converter
+
+      - name: Convert WSDL to OpenAPI
+        run: |
+          soap-converter -i ./wsdl/tgropweb_ROPWebServicesService_ROPRealTimeServicesService_ROPRealTimeServicesService.wsdl \
+            -t OpenAPI \
+            -v 3.1 \
+            -o openapi.yaml
+
+      # Install Deck using official action
+      - name: Setup decK
+        uses: kong/setup-deck@v1
+        with:
+          version: "1.40.2"
+
+      # Convert OpenAPI specs to DecK
+      - name: Generate Kong declarative configuration from Spec
+        run: deck file openapi2kong --spec ./openapi.yaml --output-file ./kong.yaml --select-tag gitops
+
+      - name: Apply Custom Plugins from File
+        run: |
+          deck file patch \
+            --state kong.yaml \
+            --state kong-config/plugins-patch.yaml \
+            --selector-selector-match-tags gitops \
+            --format yaml \
+            --output kong-patched.yaml \
+            --yes
+
+          # Replace original config with patched version
+          mv kong-patched.yaml kong.yaml
+
+      - name: Validate Kong config
+        run: |
+          deck validate -s kong.yaml
+
+      - name: Deploy to Kong Gateway
+        run: |
+          deck gateway sync ./kong.yaml --konnect-addr https://us.api.konghq.com --konnect-token $KONG_KONNECT_TOKEN --konnect-control-plane-name thai-airways-poc --select-tag gitops
+        env:
+          KONG_KONNECT_TOKEN: ${{ secrets.KONG_KONNECT_TOKEN }}
