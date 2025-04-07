@@ -54,7 +54,7 @@ jobs:
       # Add server URL from WSDL to OpenAPI spec
       - name: Update OpenAPI server URL
         run: |
-          chmod +x ./cicd-inject/inject-host.sh
+          chmod +x ./wsdl-migration-to-kong/cicd-inject/inject-host.sh
           ./wsdl-migration-to-kong/cicd-inject/inject-host.sh ./wsdl-migration-to-kong/wsdl/tgropweb_ROPWebServicesService_ROPRealTimeServicesService_ROPRealTimeServicesService.wsdl
 
           # Verify URL injection
