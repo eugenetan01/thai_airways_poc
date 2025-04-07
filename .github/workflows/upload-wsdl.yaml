@@ -43,15 +43,15 @@ jobs:
       - name: Convert swagger to openapi
         run: swagger2openapi --yaml --outfile openapi.yaml swagger.yaml
 
-      # Convert OpenAPI specs to DecK
-      - name: Generate Kong declarative configuration from Spec
-        run: deck file openapi2kong --spec ./openapi.yaml --output-file ./kong.yaml --select-tag gitops
-
       # Add server URL from WSDL to OpenAPI spec
       - name: Update OpenAPI server URL
         run: |
           chmod +x ./cicd-inject/inject-host.sh
           ./cicd-inject/inject-host.sh ./wsdl/tgropweb_ROPWebServicesService_ROPRealTimeServicesService_ROPRealTimeServicesService.wsdl
+
+      # Convert OpenAPI specs to DecK
+      - name: Generate Kong declarative configuration from Spec
+        run: deck file openapi2kong --spec ./openapi.yaml --output-file ./kong.yaml --select-tag gitops
 
       - name: Add custom plugin + basic auth plugin
         run: deck file add-plugins -s ./kong.yaml ./kong-config/plugins/plugins-inject.yaml
