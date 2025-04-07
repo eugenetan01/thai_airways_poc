@@ -24,7 +24,7 @@ jobs:
       - name: Setup decK
         uses: kong/setup-deck@v1
         with:
-          version: "1.40.2"
+          version: "1.38.1"
 
       - name: Install soap-converter
         run: |
