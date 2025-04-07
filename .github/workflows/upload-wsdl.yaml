@@ -41,7 +41,7 @@ jobs:
       - name: Convert WSDL to OpenAPI
         run: |
           soap-converter \
-            --input ./wsdl/tgropweb_ROPWebServicesService_ROPRealTimeServicesService_ROPRealTimeServicesService.wsdl \
+            --input ./wsdl-migration-to-kong/wsdl/tgropweb_ROPWebServicesService_ROPRealTimeServicesService_ROPRealTimeServicesService.wsdl \
             --target SwaggerYAML \
             --output swagger.yaml
 
@@ -55,7 +55,7 @@ jobs:
       - name: Update OpenAPI server URL
         run: |
           chmod +x ./cicd-inject/inject-host.sh
-          ./cicd-inject/inject-host.sh ./wsdl/tgropweb_ROPWebServicesService_ROPRealTimeServicesService_ROPRealTimeServicesService.wsdl
+          ./wsdl-migration-to-kong/cicd-inject/inject-host.sh ./wsdl-migration-to-kong/wsdl/tgropweb_ROPWebServicesService_ROPRealTimeServicesService_ROPRealTimeServicesService.wsdl
 
           # Verify URL injection
           if ! yq eval '.servers[0].url' openapi.yaml | grep -q 'http://'; then
@@ -68,7 +68,7 @@ jobs:
         run: deck file openapi2kong --spec ./openapi.yaml --output-file ./kong.yaml --select-tag gitops
 
       - name: Add custom plugin + basic auth plugin
-        run: deck file add-plugins -s ./kong.yaml ./kong-config/plugins/plugins-inject.yaml
+        run: deck file add-plugins -s ./kong.yaml ./wsdl-migration-to-kong/kong-config/plugins/plugins-inject.yaml
 
       - name: Validate Kong config
         run: |
