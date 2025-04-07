@@ -20,6 +20,14 @@ jobs:
         with:
           node-version: "16"
 
+      - name: Install XML tools
+        run: sudo apt-get update && sudo apt-get install -y libxml2-utils
+
+      - name: Install yq
+        run: |
+          sudo wget https://github.com/mikefarah/yq/releases/download/v4.34.1/yq_linux_amd64 -O /usr/bin/yq
+          sudo chmod +x /usr/bin/yq
+
       # Install Deck using official action
       - name: Setup decK
         uses: kong/setup-deck@v1
@@ -48,6 +56,12 @@ jobs:
         run: |
           chmod +x ./cicd-inject/inject-host.sh
           ./cicd-inject/inject-host.sh ./wsdl/tgropweb_ROPWebServicesService_ROPRealTimeServicesService_ROPRealTimeServicesService.wsdl
+
+          # Verify URL injection
+          if ! yq eval '.servers[0].url' openapi.yaml | grep -q 'http://'; then
+            echo "❌ Server URL injection failed!"
+            exit 1
+          fi
 
       # Convert OpenAPI specs to DecK
       - name: Generate Kong declarative configuration from Spec
