@@ -1,177 +1,182 @@
-- name: basic-auth
-  enabled: true
-  config:
-    hide_credentials: true
-    anonymous: ""
-  service:
-    tags: ["gitops"]
-  tags: ["gitops"]
+add-plugins:
+  - selectors:
+      - $..services[*]
+    overwrite: false
+    plugins:
+      - name: basic-auth
+        enabled: true
+        config:
+          hide_credentials: true
+          anonymous: ""
+        service:
+          tags: ["gitops"]
+        tags: ["gitops"]
 
-- name: request-callout
-  config:
-    cache:
-      cache_ttl: 300
-      memory:
-        dictionary_name: kong_db_cache
-      redis:
-        cluster_addresses: null
-        cluster_max_redirections: 5
-        cluster_nodes: null
-        connect_timeout: 2000
-        connection_is_proxied: false
-        database: 0
-        host: 127.0.0.1
-        keepalive_backlog: null
-        keepalive_pool_size: 256
-        password: null
-        port: 6379
-        read_timeout: 2000
-        send_timeout: 2000
-        sentinel_addresses: null
-        sentinel_master: null
-        sentinel_nodes: null
-        sentinel_password: null
-        sentinel_role: null
-        sentinel_username: null
-        server_name: null
-        ssl: false
-        ssl_verify: false
-        timeout: 2000
-        username: null
-      strategy: "off"
-    callouts:
-      - cache:
-          bypass: false
-        depends_on: []
-        name: validation_service
-        request:
-          body:
-            custom: {}
-            decode: false
-            forward: false
-          by_lua: >-
-            local raw_body = kong.request.get_raw_body()
-
-
-            -- kong.log.err("Raw Body: ", raw_body or "nil")
-
-
-            -- Validate payload exists
-
-            if not raw_body or raw_body == "" then
-                kong.response.exit(400, { message = "Empty payload: XML body required" })
-            end
+      - name: request-callout
+        config:
+          cache:
+            cache_ttl: 300
+            memory:
+              dictionary_name: kong_db_cache
+            redis:
+              cluster_addresses: null
+              cluster_max_redirections: 5
+              cluster_nodes: null
+              connect_timeout: 2000
+              connection_is_proxied: false
+              database: 0
+              host: 127.0.0.1
+              keepalive_backlog: null
+              keepalive_pool_size: 256
+              password: null
+              port: 6379
+              read_timeout: 2000
+              send_timeout: 2000
+              sentinel_addresses: null
+              sentinel_master: null
+              sentinel_nodes: null
+              sentinel_password: null
+              sentinel_role: null
+              sentinel_username: null
+              server_name: null
+              ssl: false
+              ssl_verify: false
+              timeout: 2000
+              username: null
+            strategy: "off"
+          callouts:
+            - cache:
+                bypass: false
+              depends_on: []
+              name: validation_service
+              request:
+                body:
+                  custom: {}
+                  decode: false
+                  forward: false
+                by_lua: >-
+                  local raw_body = kong.request.get_raw_body()
 
 
-            -- Extract Nonce
+                  -- kong.log.err("Raw Body: ", raw_body or "nil")
 
-            local nonce = raw_body:match("<wsse:Nonce.-[^>]*>(.-)</wsse:Nonce>")
 
-            -- kong.log.err(nonce)
+                  -- Validate payload exists
 
-            if not nonce then
-                kong.response.exit(400, {
-                    message = "Validation failed",
-                    error = "Missing or malformed wsse:Nonce"
+                  if not raw_body or raw_body == "" then
+                      kong.response.exit(400, { message = "Empty payload: XML body required" })
+                  end
+
+
+                  -- Extract Nonce
+
+                  local nonce = raw_body:match("<wsse:Nonce.-[^>]*>(.-)</wsse:Nonce>")
+
+                  -- kong.log.err(nonce)
+
+                  if not nonce then
+                      kong.response.exit(400, {
+                          message = "Validation failed",
+                          error = "Missing or malformed wsse:Nonce"
+                      })
+                  end
+
+
+                  local created_date =
+                  raw_body:match("<wsu:Created.-%>(.-)</wsu:Created>")
+
+                  if not created_date then
+                      kong.response.exit(400, {
+                          message = "Validation failed",
+                          error = "Missing or malformed <wsu:Created>"
+                      })
+                  end
+
+
+                  -- kong.ctx.shared.nonce = nonce
+
+                  -- kong.ctx.shared.departure_date = departure_date
+
+
+                  -- local uri = "https://sfp8q4jp-5000.asse.devtunnels.ms/check?nonce="
+                  ..
+
+                  --    nonce ..
+
+                  --    "&created_date=" .. departure_date
+
+
+                  -- kong.log.err(uri)
+
+
+                  kong.ctx.shared.callouts.validation_service.request.params.url =
+                      "https://sfp8q4jp-5000.asse.devtunnels.ms/check?nonce=" ..
+                      nonce ..
+                      "&created_date=" .. created_date
+                error:
+                  error_response_code: 400
+                  error_response_msg: service callout error
+                  http_statuses: null
+                  on_error: fail
+                  retries: 2
+                headers:
+                  custom: null
+                  forward: false
+                http_opts:
+                  proxy: null
+                  ssl_server_name: null
+                  ssl_verify: false
+                  timeouts: null
+                method: GET
+                query:
+                  custom: null
+                  forward: false
+                url: https://sfp8q4jp-5000.asse.devtunnels.ms/check
+              response:
+                body:
+                  decode: false
+                  store: true
+                by_lua: null
+                headers:
+                  store: true
+          upstream:
+            body:
+              custom: null
+              decode: true
+              forward: true
+            by_lua: |-
+              local status = kong.ctx.shared.callouts.validation_service.response.status
+              if status >= 400 then
+                    local soap_fault = [[
+                  <soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+                    <soap:Body>
+                      <soap:Fault>
+                        <faultcode>soap:Client</faultcode>
+                        <faultstring>Invalid SOAP payload</faultstring>
+                        <detail>
+                          The SOAP payload could not be validated due to incorrect structure or content.
+                        </detail>
+                      </soap:Fault>
+                    </soap:Body>
+                  </soap:Envelope>
+                ]]
+
+                return kong.response.exit(status, soap_fault, {
+                  ["Content-Type"] = "text/xml; charset=utf-8"
                 })
-            end
-
-
-            local created_date =
-            raw_body:match("<wsu:Created.-%>(.-)</wsu:Created>")
-
-            if not created_date then
-                kong.response.exit(400, {
-                    message = "Validation failed",
-                    error = "Missing or malformed <wsu:Created>"
-                })
-            end
-
-
-            -- kong.ctx.shared.nonce = nonce
-
-            -- kong.ctx.shared.departure_date = departure_date
-
-
-            -- local uri = "https://sfp8q4jp-5000.asse.devtunnels.ms/check?nonce="
-            ..
-
-            --    nonce ..
-
-            --    "&created_date=" .. departure_date
-
-
-            -- kong.log.err(uri)
-
-
-            kong.ctx.shared.callouts.validation_service.request.params.url =
-                "https://sfp8q4jp-5000.asse.devtunnels.ms/check?nonce=" ..
-                nonce ..
-                "&created_date=" .. created_date
-          error:
-            error_response_code: 400
-            error_response_msg: service callout error
-            http_statuses: null
-            on_error: fail
-            retries: 2
-          headers:
-            custom: null
-            forward: false
-          http_opts:
-            proxy: null
-            ssl_server_name: null
-            ssl_verify: false
-            timeouts: null
-          method: GET
-          query:
-            custom: null
-            forward: false
-          url: https://sfp8q4jp-5000.asse.devtunnels.ms/check
-        response:
-          body:
-            decode: false
-            store: true
-          by_lua: null
-          headers:
-            store: true
-    upstream:
-      body:
-        custom: null
-        decode: true
-        forward: true
-      by_lua: |-
-        local status = kong.ctx.shared.callouts.validation_service.response.status
-        if status >= 400 then
-              local soap_fault = [[
-            <soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
-              <soap:Body>
-                <soap:Fault>
-                  <faultcode>soap:Client</faultcode>
-                  <faultstring>Invalid SOAP payload</faultstring>
-                  <detail>
-                    The SOAP payload could not be validated due to incorrect structure or content.
-                  </detail>
-                </soap:Fault>
-              </soap:Body>
-            </soap:Envelope>
-          ]]
-
-          return kong.response.exit(status, soap_fault, {
-            ["Content-Type"] = "text/xml; charset=utf-8"
-          })
-        end
-      headers:
-        custom: null
-        forward: true
-      query:
-        custom: null
-        forward: true
-  enabled: true
-  protocols:
-    - grpc
-    - grpcs
-    - http
-    - https
-  service:
-    tags: ["gitops"]
-  tags: ["gitops"]
+              end
+            headers:
+              custom: null
+              forward: true
+            query:
+              custom: null
+              forward: true
+        enabled: true
+        protocols:
+          - grpc
+          - grpcs
+          - http
+          - https
+        service:
+          tags: ["gitops"]
+        tags: ["gitops"]

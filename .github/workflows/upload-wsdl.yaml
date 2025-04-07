@@ -47,18 +47,8 @@ jobs:
       - name: Generate Kong declarative configuration from Spec
         run: deck file openapi2kong --spec ./openapi.yaml --output-file ./kong.yaml --select-tag gitops
 
-      - name: Apply Custom Plugins from File
-        run: |
-          deck file patch \
-            --state kong.yaml \
-            --state kong-config/plugins-patch.yaml \
-            --selector-selector-match-tags gitops \
-            --format yaml \
-            --output kong-patched.yaml \
-            --yes
-
-          # Replace original config with patched version
-          mv kong-patched.yaml kong.yaml
+      - name: Add custom plugin + basic auth plugin
+        run: deck file add-plugins -s ./kong.yaml ./kong-config/plugins/plugins-inject.yaml
 
       - name: Validate Kong config
         run: |
