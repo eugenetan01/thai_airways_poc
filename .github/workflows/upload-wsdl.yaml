@@ -20,6 +20,12 @@ jobs:
         with:
           node-version: "16"
 
+      # Install Deck using official action
+      - name: Setup decK
+        uses: kong/setup-deck@v1
+        with:
+          version: "1.40.2"
+
       - name: Install soap-converter
         run: |
           npm install -g soap-converter@0.2.1
