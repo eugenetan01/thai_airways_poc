@@ -35,7 +35,13 @@ jobs:
           soap-converter \
             --input ./wsdl/tgropweb_ROPWebServicesService_ROPRealTimeServicesService_ROPRealTimeServicesService.wsdl \
             --target SwaggerYAML \
-            --output openapi.yaml
+            --output swagger.yaml
+
+      - name: Install swagger2openapi
+        run: npm install -g swagger2openapi
+
+      - name: Convert swagger to openapi
+        run: swagger2openapi --yaml --outfile openapi.yaml swagger.yaml
 
       # Convert OpenAPI specs to DecK
       - name: Generate Kong declarative configuration from Spec
