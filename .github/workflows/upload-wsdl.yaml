@@ -37,15 +37,15 @@ jobs:
             --target SwaggerYAML \
             --output swagger.yaml
 
-      - name: Install swagger2openapi
-        run: npm install -g swagger2openapi
+      #- name: Install swagger2openapi
+      #  run: npm install -g swagger2openapi
 
-      - name: Convert swagger to openapi
-        run: swagger2openapi --yaml --outfile openapi.yaml swagger.yaml
+      #- name: Convert swagger to openapi
+      #  run: swagger2openapi --yaml --outfile openapi.yaml swagger.yaml
 
       # Convert OpenAPI specs to DecK
       - name: Generate Kong declarative configuration from Spec
-        run: deck file openapi2kong --spec ./openapi.yaml --output-file ./kong.yaml --select-tag gitops
+        run: deck file openapi2kong --spec ./swagger.yaml --output-file ./kong.yaml --select-tag gitops
 
       - name: Add custom plugin + basic auth plugin
         run: deck file add-plugins -s ./kong.yaml ./kong-config/plugins/plugins-inject.yaml
