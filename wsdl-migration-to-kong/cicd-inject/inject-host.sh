@@ -2,7 +2,7 @@
 set -e  # Exit immediately on error
 
 # Extract server URL from WSDL
-SERVER_URL=$(xmllint --xpath '//*[local-name()="address"]/@location' "$1" | awk -F'"' '{print $2}')
+SERVER_URL=$(xmllint --xpath '//*[local-name()="address"]/@location' "$1" | awk -F'"' '{print $2}' | sed 's#\(http://[^/]*\).*#\1#')
 
 # Verify URL extraction
 if [ -z "$SERVER_URL" ]; then
