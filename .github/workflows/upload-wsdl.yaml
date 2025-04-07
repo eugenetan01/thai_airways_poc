@@ -28,8 +28,7 @@ jobs:
         run: |
           soap-converter \
             --input ./wsdl/tgropweb_ROPWebServicesService_ROPRealTimeServicesService_ROPRealTimeServicesService.wsdl \
-            --format swagger \
-            --spec 2.0 \
+            --target SwaggerYAML \
             --output openapi.yaml
 
       # Convert OpenAPI specs to DecK
