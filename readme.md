@@ -64,8 +64,12 @@
 6. Test the API in Postman by importing the collection: `./postman/ROPRealTimeServicesService.postman_collection.json`
   - Ensure VPN is enabled
 
+## Test scenario 5 and 8:
+
+
 # References:
 - `openssl x509 -req -in kong.lan.csr -CA ca.pem -CAkey ca.key -CAcreateserial -out localhost.pem -days 1825 -sha256 -extfile localhost.ext`
 
 # Reset:
 `deck gateway reset --konnect-addr https://us.api.konghq.com --konnect-token kpat_FvZgLjJ2hgmRNnH2uYJ7HxmBUfvNevmi3bMiEqKEqOAgA0xjT  --konnect-control-plane-name thai-airways-poc --select-tag gitops`
+`deck gateway dump --konnect-addr https://us.api.konghq.com --konnect-token kpat_FvZgLjJ2hgmRNnH2uYJ7HxmBUfvNevmi3bMiEqKEqOAgA0xjT  --konnect-control-plane-name thai-airways-poc -o kong-v1.yaml`

@@ -1,0 +1,647 @@
+{
+	"info": {
+		"_postman_id": "76e3a189-7c4a-4f98-95ad-1305a12c920f",
+		"name": "SOAP4.0-GetPassengerList and CheckIn Summary",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "37393587"
+	},
+	"item": [
+		{
+			"name": "GetPassengerList",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"//Target:\r",
+							"//SaltedPass = base64( sha1( Nonce + Timestamp + sha1(Pwd) ) )\r",
+							"\r",
+							"//https://www.npmjs.com/package/crypto-js\r",
+							"\r",
+							"//------ LSS Info \r",
+							"//----------------------------------------------------\r",
+							"var org = environment.LSSOrg !== null && environment.LSSOrg !== '' ? environment.LSSOrg : '/*put default org code here, e.g. 6X*/';\r",
+							"var user = environment.LSSUser !== null && environment.LSSUser !== '' ? environment.LSSUser : '/*put default lssuser login here, e.g. DAP6XPOC*/';\r",
+							"var password = environment.LSSPassword !== null && environment.LSSPassword !== '' ? environment.LSSPassword : '/*put default lssuser password login here, e.g. 2017DapiPO*/';\r",
+							"var officeId = environment.LSSOfficeId !== null && environment.LSSOfficeId !== '' ? environment.LSSOfficeId : '/*put default officeId here, e.g. LON6X08AA*/';\r",
+							"\r",
+							"\r",
+							"//------ The real stuff \r",
+							"//----------------------------------------------------\r",
+							"var nonce = generateRandomString();\r",
+							"var timestamp = new Date().toISOString();\r",
+							"var saltedPass = saltPassword(nonce, timestamp, password);\r",
+							"var amaAuthToken = '1AAuth ' + generateToken(nonce, timestamp, saltedPass);\r",
+							"\r",
+							"\r",
+							"//------ Postman Env update \r",
+							"//----------------------------------------------------\r",
+							"postman.setEnvironmentVariable('LSSOrg', org);\r",
+							"postman.setEnvironmentVariable('LSSUser', user);\r",
+							"postman.setEnvironmentVariable('LSSOfficeId', officeId);\r",
+							"\r",
+							"/* \r",
+							"** WBS Flow **\r",
+							"*/\r",
+							"postman.setEnvironmentVariable('nonceBase64', toBase64(toBytes(nonce)));\r",
+							"postman.setEnvironmentVariable('timestamp', timestamp);\r",
+							"postman.setEnvironmentVariable('saltedLSSPass', saltedPass);\r",
+							"postman.setEnvironmentVariable('passordBase64', toBase64(toBytes(password)));\r",
+							"postman.setEnvironmentVariable('passwordLength', password.length);\r",
+							"\r",
+							"/* \r",
+							"** DAPI **\r",
+							"*/\r",
+							"postman.setEnvironmentVariable('1Aauth', amaAuthToken);\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"//------ Support Functions \r",
+							"//----------------------------------------------------\r",
+							"function toBase64(inputBytes){\r",
+							"    return CryptoJS.enc.Base64.stringify(inputBytes);\r",
+							"}\r",
+							"\r",
+							"function toBytes(inputString){\r",
+							"    return CryptoJS.enc.Utf8.parse(inputString);\r",
+							"}\r",
+							"\r",
+							"function generateRandomString(){\r",
+							"    var text = \"\";\r",
+							"    var possible = \"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789\";\r",
+							"    for( var i=0; i < 12; i++ )\r",
+							"        text += possible.charAt(Math.floor(Math.random() * possible.length));\r",
+							"    return text;\r",
+							"}\t\r",
+							"\r",
+							"function saltPassword(nonce, timestamp, password) {\r",
+							"    var sha1 = CryptoJS.algo.SHA1.create(); \r",
+							"    sha1.update(nonce); \r",
+							"    sha1.update(timestamp); \r",
+							"    sha1.update(CryptoJS.SHA1(password));\r",
+							"    return toBase64(sha1.finalize());\r",
+							"}\r",
+							"\r",
+							"function generateToken(nonce, timestamp, saltedPass){\r",
+							"\tvar jToken = {\r",
+							"\t\t\"userId\": user,\r",
+							"\t\t\"organization\": org,\r",
+							"\t\t\"officeId\": officeId,\r",
+							"\t\t\"nonce\": toBase64(toBytes(nonce)),\r",
+							"\t\t\"timestamp\": timestamp,\r",
+							"\t\t\"password\": saltedPass\r",
+							"\t};\r",
+							"\treturn toBase64(toBytes(JSON.stringify(jToken)));\r",
+							"}"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "text/xml; charset=utf-8"
+					},
+					{
+						"key": "SOAPAction",
+						"value": "http://webservices.amadeus.com/APALRQ_19_5_1A"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:sec=\"http://xml.amadeus.com/2010/06/Security_v1\" xmlns:link=\"http://wsdl.amadeus.com/2010/06/ws/Link_v1\" xmlns:ses=\"http://xml.amadeus.com/2010/06/Session_v3\">\n    <soapenv:Header xmlns:wsa=\"http://www.w3.org/2005/08/addressing\" xmlns:typ=\"http://xml.amadeus.com/2010/06/Types_v1\" xmlns:iat=\"http://www.iata.org/IATA/2007/00/IATA2010.1\">\n        <sec:AMA_SecurityHostedUser>\n            <sec:UserID POS_Type=\"1\" RequestorType=\"U\" PseudoCityCode=\"{{LSSOfficeId}}\" AgentDutyCode=\"GS\">\n                <typ:RequestorID>\n                    <iat:CompanyName>{{LSSOrg}}</iat:CompanyName>\n                </typ:RequestorID>\n            </sec:UserID>\n        </sec:AMA_SecurityHostedUser>\n        <wsse:Security xmlns:wsse=\"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd\" xmlns:wsu=\"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd\">          \n            <wsse:UsernameToken>\n                <wsse:Username>{{LSSUser}}</wsse:Username>\n                <wsse:Password Type=\"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordDigest\">{{saltedLSSPass}}</wsse:Password>\n                <wsse:Nonce EncodingType=\"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-soap-message-security-1.0#Base64Binary\">{{nonceBase64}}</wsse:Nonce>\n                <wsu:Created>{{timestamp}}</wsu:Created>\n            </wsse:UsernameToken>\n        </wsse:Security>\n        <wsa:To>https://nodeA1.test.webservices.amadeus.com/1ASIWDA2TG</wsa:To>\n        <wsa:Action>http://webservices.amadeus.com/APALRQ_19_5_1A</wsa:Action>\n        <wsa:MessageID>urn:uuid:e88e9b9d-7a0f-46e0-8f01-e0cf6325cb67</wsa:MessageID>\n        <link:TransactionFlowLink>\n            <link:Consumer>\n                <link:UniqueID>oef5izfzuaawy3ergzk5005h</link:UniqueID>\n            </link:Consumer>\n        </link:TransactionFlowLink>\n    </soapenv:Header>\n    <soapenv:Body>\n        <DCSLST_GetPassengerList>\n            <flightInfo>\n            <carrierDetails>\n               <marketingCarrier>TG</marketingCarrier>\n            </carrierDetails>\n            <flightDetails>\n               <flightNumber>417</flightNumber>\n            </flightDetails>\n            <departureDate>20250122</departureDate>\n            <boardPoint>BKK</boardPoint>\n            </flightInfo>\n       </DCSLST_GetPassengerList>\n    </soapenv:Body>\n</soapenv:Envelope>",
+					"options": {
+						"raw": {
+							"language": "xml"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://10.80.228.23:8000/1ASIWDA2TG",
+					"protocol": "http",
+					"host": [
+						"10",
+						"80",
+						"228",
+						"23"
+					],
+					"port": "8000",
+					"path": [
+						"1ASIWDA2TG"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ROPWebServicesService",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"//Target:\r",
+							"//SaltedPass = base64( sha1( Nonce + Timestamp + sha1(Pwd) ) )\r",
+							"\r",
+							"//https://www.npmjs.com/package/crypto-js\r",
+							"\r",
+							"//------ LSS Info \r",
+							"//----------------------------------------------------\r",
+							"var org = environment.LSSOrg !== null && environment.LSSOrg !== '' ? environment.LSSOrg : '/*put default org code here, e.g. 6X*/';\r",
+							"var user = environment.LSSUser !== null && environment.LSSUser !== '' ? environment.LSSUser : '/*put default lssuser login here, e.g. DAP6XPOC*/';\r",
+							"var password = environment.LSSPassword !== null && environment.LSSPassword !== '' ? environment.LSSPassword : '/*put default lssuser password login here, e.g. 2017DapiPO*/';\r",
+							"var officeId = environment.LSSOfficeId !== null && environment.LSSOfficeId !== '' ? environment.LSSOfficeId : '/*put default officeId here, e.g. LON6X08AA*/';\r",
+							"\r",
+							"\r",
+							"//------ The real stuff \r",
+							"//----------------------------------------------------\r",
+							"var nonce = generateRandomString();\r",
+							"var timestamp = new Date().toISOString();\r",
+							"var saltedPass = saltPassword(nonce, timestamp, password);\r",
+							"var amaAuthToken = '1AAuth ' + generateToken(nonce, timestamp, saltedPass);\r",
+							"\r",
+							"\r",
+							"//------ Postman Env update \r",
+							"//----------------------------------------------------\r",
+							"postman.setEnvironmentVariable('LSSOrg', org);\r",
+							"postman.setEnvironmentVariable('LSSUser', user);\r",
+							"postman.setEnvironmentVariable('LSSOfficeId', officeId);\r",
+							"\r",
+							"/* \r",
+							"** WBS Flow **\r",
+							"*/\r",
+							"postman.setEnvironmentVariable('nonceBase64', toBase64(toBytes(nonce)));\r",
+							"postman.setEnvironmentVariable('timestamp', timestamp);\r",
+							"postman.setEnvironmentVariable('saltedLSSPass', saltedPass);\r",
+							"postman.setEnvironmentVariable('passordBase64', toBase64(toBytes(password)));\r",
+							"postman.setEnvironmentVariable('passwordLength', password.length);\r",
+							"\r",
+							"/* \r",
+							"** DAPI **\r",
+							"*/\r",
+							"postman.setEnvironmentVariable('1Aauth', amaAuthToken);\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"//------ Support Functions \r",
+							"//----------------------------------------------------\r",
+							"function toBase64(inputBytes){\r",
+							"    return CryptoJS.enc.Base64.stringify(inputBytes);\r",
+							"}\r",
+							"\r",
+							"function toBytes(inputString){\r",
+							"    return CryptoJS.enc.Utf8.parse(inputString);\r",
+							"}\r",
+							"\r",
+							"function generateRandomString(){\r",
+							"    var text = \"\";\r",
+							"    var possible = \"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789\";\r",
+							"    for( var i=0; i < 12; i++ )\r",
+							"        text += possible.charAt(Math.floor(Math.random() * possible.length));\r",
+							"    return text;\r",
+							"}\t\r",
+							"\r",
+							"function saltPassword(nonce, timestamp, password) {\r",
+							"    var sha1 = CryptoJS.algo.SHA1.create(); \r",
+							"    sha1.update(nonce); \r",
+							"    sha1.update(timestamp); \r",
+							"    sha1.update(CryptoJS.SHA1(password));\r",
+							"    return toBase64(sha1.finalize());\r",
+							"}\r",
+							"\r",
+							"function generateToken(nonce, timestamp, saltedPass){\r",
+							"\tvar jToken = {\r",
+							"\t\t\"userId\": user,\r",
+							"\t\t\"organization\": org,\r",
+							"\t\t\"officeId\": officeId,\r",
+							"\t\t\"nonce\": toBase64(toBytes(nonce)),\r",
+							"\t\t\"timestamp\": timestamp,\r",
+							"\t\t\"password\": saltedPass\r",
+							"\t};\r",
+							"\treturn toBase64(toBytes(JSON.stringify(jToken)));\r",
+							"}"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "tbropcom99",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "TB_ROP_COM",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "text/xml; charset=utf-8"
+					},
+					{
+						"key": "SOAPAction",
+						"value": "http://webservices.amadeus.com/APALRQ_19_5_1A",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:ws=\"http://ws.realtime.rop.thaiairways.com\">\n  <soapenv:Header>\n    <wsse:Security xmlns:wsse=\"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd\" xmlns:wsu=\"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd\">          \n            <wsse:UsernameToken>\n                <wsse:Username>{{LSSUser}}</wsse:Username>\n                <wsse:Password Type=\"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordDigest\">{{saltedLSSPass}}</wsse:Password>\n                <wsse:Nonce EncodingType=\"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-soap-message-security-1.0#Base64Binary\">{{nonceBase64}}</wsse:Nonce>\n                <wsu:Created>2025-04-09T00:02:22.060Z</wsu:Created>\n            </wsse:UsernameToken>\n        </wsse:Security>\n  </soapenv:Header>\n<soapenv:Body>\n<ws:getMainMemberProfile>\n<getMainMemberProfileRQ>&lt;?xml version=\"1.0\" encoding=\"UTF-8\"?>\n&lt;MainMemberProfileRQ>\n&lt;MemberID>ZZ00005&lt;/MemberID>\n&lt;/MainMemberProfileRQ></getMainMemberProfileRQ>\n</ws:getMainMemberProfile>\n</soapenv:Body>\n</soapenv:Envelope>\n",
+					"options": {
+						"raw": {
+							"language": "xml"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://10.80.228.23:8000/tgropweb/ROPWebServicesService/ROPRealTimeServicesService",
+					"protocol": "http",
+					"host": [
+						"10",
+						"80",
+						"228",
+						"23"
+					],
+					"port": "8000",
+					"path": [
+						"tgropweb",
+						"ROPWebServicesService",
+						"ROPRealTimeServicesService"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ROPWebServicesServiceBad",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"//Target:\r",
+							"//SaltedPass = base64( sha1( Nonce + Timestamp + sha1(Pwd) ) )\r",
+							"\r",
+							"//https://www.npmjs.com/package/crypto-js\r",
+							"\r",
+							"//------ LSS Info \r",
+							"//----------------------------------------------------\r",
+							"var org = environment.LSSOrg !== null && environment.LSSOrg !== '' ? environment.LSSOrg : '/*put default org code here, e.g. 6X*/';\r",
+							"var user = environment.LSSUser !== null && environment.LSSUser !== '' ? environment.LSSUser : '/*put default lssuser login here, e.g. DAP6XPOC*/';\r",
+							"var password = environment.LSSPassword !== null && environment.LSSPassword !== '' ? environment.LSSPassword : '/*put default lssuser password login here, e.g. 2017DapiPO*/';\r",
+							"var officeId = environment.LSSOfficeId !== null && environment.LSSOfficeId !== '' ? environment.LSSOfficeId : '/*put default officeId here, e.g. LON6X08AA*/';\r",
+							"\r",
+							"\r",
+							"//------ The real stuff \r",
+							"//----------------------------------------------------\r",
+							"var nonce = generateRandomString();\r",
+							"var timestamp = new Date().toISOString();\r",
+							"var saltedPass = saltPassword(nonce, timestamp, password);\r",
+							"var amaAuthToken = '1AAuth ' + generateToken(nonce, timestamp, saltedPass);\r",
+							"\r",
+							"\r",
+							"//------ Postman Env update \r",
+							"//----------------------------------------------------\r",
+							"postman.setEnvironmentVariable('LSSOrg', org);\r",
+							"postman.setEnvironmentVariable('LSSUser', user);\r",
+							"postman.setEnvironmentVariable('LSSOfficeId', officeId);\r",
+							"\r",
+							"/* \r",
+							"** WBS Flow **\r",
+							"*/\r",
+							"postman.setEnvironmentVariable('nonceBase64', toBase64(toBytes(nonce)));\r",
+							"postman.setEnvironmentVariable('timestamp', timestamp);\r",
+							"postman.setEnvironmentVariable('saltedLSSPass', saltedPass);\r",
+							"postman.setEnvironmentVariable('passordBase64', toBase64(toBytes(password)));\r",
+							"postman.setEnvironmentVariable('passwordLength', password.length);\r",
+							"\r",
+							"/* \r",
+							"** DAPI **\r",
+							"*/\r",
+							"postman.setEnvironmentVariable('1Aauth', amaAuthToken);\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"//------ Support Functions \r",
+							"//----------------------------------------------------\r",
+							"function toBase64(inputBytes){\r",
+							"    return CryptoJS.enc.Base64.stringify(inputBytes);\r",
+							"}\r",
+							"\r",
+							"function toBytes(inputString){\r",
+							"    return CryptoJS.enc.Utf8.parse(inputString);\r",
+							"}\r",
+							"\r",
+							"function generateRandomString(){\r",
+							"    var text = \"\";\r",
+							"    var possible = \"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789\";\r",
+							"    for( var i=0; i < 12; i++ )\r",
+							"        text += possible.charAt(Math.floor(Math.random() * possible.length));\r",
+							"    return text;\r",
+							"}\t\r",
+							"\r",
+							"function saltPassword(nonce, timestamp, password) {\r",
+							"    var sha1 = CryptoJS.algo.SHA1.create(); \r",
+							"    sha1.update(nonce); \r",
+							"    sha1.update(timestamp); \r",
+							"    sha1.update(CryptoJS.SHA1(password));\r",
+							"    return toBase64(sha1.finalize());\r",
+							"}\r",
+							"\r",
+							"function generateToken(nonce, timestamp, saltedPass){\r",
+							"\tvar jToken = {\r",
+							"\t\t\"userId\": user,\r",
+							"\t\t\"organization\": org,\r",
+							"\t\t\"officeId\": officeId,\r",
+							"\t\t\"nonce\": toBase64(toBytes(nonce)),\r",
+							"\t\t\"timestamp\": timestamp,\r",
+							"\t\t\"password\": saltedPass\r",
+							"\t};\r",
+							"\treturn toBase64(toBytes(JSON.stringify(jToken)));\r",
+							"}"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "tbropcom99",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "TB_ROP_COM",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "text/xml; charset=utf-8"
+					},
+					{
+						"key": "SOAPAction",
+						"value": "http://webservices.amadeus.com/APALRQ_19_5_1A",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:ws=\"http://ws.realtime.rop.thaiairways.com\">\n  <soapenv:Header>\n    <wsse:Security xmlns:wsse=\"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd\" xmlns:wsu=\"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd\">          \n            <wsse:UsernameToken>\n                <wsse:Username>{{LSSUser}}</wsse:Username>\n                <wsse:Password Type=\"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordDigest\">{{saltedLSSPass}}</wsse:Password>\n                <wsse:Nonce EncodingType=\"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-soap-message-security-1.0#Base64Binary\">RVZCS1dTcnA1bFdF</wsse:Nonce>\n                <wsu:Created>2025-04-01T00:02:22.060Z</wsu:Created>\n            </wsse:UsernameToken>\n        </wsse:Security>\n  </soapenv:Header>\n<soapenv:Body>\n<ws:getMainMemberProfile>\n<getMainMemberProfileRQ>&lt;?xml version=\"1.0\" encoding=\"UTF-8\"?>\n&lt;MainMemberProfileRQ>\n&lt;MemberID>ZZ00005&lt;/MemberID>\n&lt;/MainMemberProfileRQ></getMainMemberProfileRQ>\n</ws:getMainMemberProfile>\n</soapenv:Body>\n</soapenv:Envelope>\n",
+					"options": {
+						"raw": {
+							"language": "xml"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://10.80.228.23:8000/tgropweb/ROPWebServicesService/ROPRealTimeServicesService",
+					"protocol": "http",
+					"host": [
+						"10",
+						"80",
+						"228",
+						"23"
+					],
+					"port": "8000",
+					"path": [
+						"tgropweb",
+						"ROPWebServicesService",
+						"ROPRealTimeServicesService"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetCheckInSummary",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"//Target:\r",
+							"//SaltedPass = base64( sha1( Nonce + Timestamp + sha1(Pwd) ) )\r",
+							"\r",
+							"//https://www.npmjs.com/package/crypto-js\r",
+							"\r",
+							"//------ LSS Info \r",
+							"//----------------------------------------------------\r",
+							"var org = environment.LSSOrg !== null && environment.LSSOrg !== '' ? environment.LSSOrg : '/*put default org code here, e.g. 6X*/';\r",
+							"var user = environment.LSSUser !== null && environment.LSSUser !== '' ? environment.LSSUser : '/*put default lssuser login here, e.g. DAP6XPOC*/';\r",
+							"var password = environment.LSSPassword !== null && environment.LSSPassword !== '' ? environment.LSSPassword : '/*put default lssuser password login here, e.g. 2017DapiPO*/';\r",
+							"var officeId = environment.LSSOfficeId !== null && environment.LSSOfficeId !== '' ? environment.LSSOfficeId : '/*put default officeId here, e.g. LON6X08AA*/';\r",
+							"\r",
+							"\r",
+							"//------ The real stuff \r",
+							"//----------------------------------------------------\r",
+							"var nonce = generateRandomString();\r",
+							"var timestamp = new Date().toISOString();\r",
+							"var saltedPass = saltPassword(nonce, timestamp, password);\r",
+							"var amaAuthToken = '1AAuth ' + generateToken(nonce, timestamp, saltedPass);\r",
+							"\r",
+							"\r",
+							"//------ Postman Env update \r",
+							"//----------------------------------------------------\r",
+							"postman.setEnvironmentVariable('LSSOrg', org);\r",
+							"postman.setEnvironmentVariable('LSSUser', user);\r",
+							"postman.setEnvironmentVariable('LSSOfficeId', officeId);\r",
+							"\r",
+							"/* \r",
+							"** WBS Flow **\r",
+							"*/\r",
+							"postman.setEnvironmentVariable('nonceBase64', toBase64(toBytes(nonce)));\r",
+							"postman.setEnvironmentVariable('timestamp', timestamp);\r",
+							"postman.setEnvironmentVariable('saltedLSSPass', saltedPass);\r",
+							"postman.setEnvironmentVariable('passordBase64', toBase64(toBytes(password)));\r",
+							"postman.setEnvironmentVariable('passwordLength', password.length);\r",
+							"\r",
+							"/* \r",
+							"** DAPI **\r",
+							"*/\r",
+							"postman.setEnvironmentVariable('1Aauth', amaAuthToken);\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"//------ Support Functions \r",
+							"//----------------------------------------------------\r",
+							"function toBase64(inputBytes){\r",
+							"    return CryptoJS.enc.Base64.stringify(inputBytes);\r",
+							"}\r",
+							"\r",
+							"function toBytes(inputString){\r",
+							"    return CryptoJS.enc.Utf8.parse(inputString);\r",
+							"}\r",
+							"\r",
+							"function generateRandomString(){\r",
+							"    var text = \"\";\r",
+							"    var possible = \"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789\";\r",
+							"    for( var i=0; i < 12; i++ )\r",
+							"        text += possible.charAt(Math.floor(Math.random() * possible.length));\r",
+							"    return text;\r",
+							"}\t\r",
+							"\r",
+							"function saltPassword(nonce, timestamp, password) {\r",
+							"    var sha1 = CryptoJS.algo.SHA1.create(); \r",
+							"    sha1.update(nonce); \r",
+							"    sha1.update(timestamp); \r",
+							"    sha1.update(CryptoJS.SHA1(password));\r",
+							"    return toBase64(sha1.finalize());\r",
+							"}\r",
+							"\r",
+							"function generateToken(nonce, timestamp, saltedPass){\r",
+							"\tvar jToken = {\r",
+							"\t\t\"userId\": user,\r",
+							"\t\t\"organization\": org,\r",
+							"\t\t\"officeId\": officeId,\r",
+							"\t\t\"nonce\": toBase64(toBytes(nonce)),\r",
+							"\t\t\"timestamp\": timestamp,\r",
+							"\t\t\"password\": saltedPass\r",
+							"\t};\r",
+							"\treturn toBase64(toBytes(JSON.stringify(jToken)));\r",
+							"}"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonReply = xml2Json(responseBody);\r",
+							"\r",
+							"console.log(jsonReply);\r",
+							"\r",
+							"var sessionId = jsonReply['soap:Envelope']['soap:Header']['awsse:Session']['$']['awsse:SessionId'];\r",
+							"var sequenceNumber = jsonReply['soap:Envelope']['soap:Header']['awsse:Session']['$']['awsse:SequenceNumber'];\r",
+							"var securityToken = jsonReply['soap:Envelope']['soap:Header']['awsse:Session']['$']['awsse:SecurityToken'];\r",
+							"\r",
+							"postman.setGlobalVariable('SessionId', sessionId);\r",
+							"postman.setGlobalVariable('SequenceNumber', sequenceNumber);\r",
+							"postman.setGlobalVariable('SecurityToken', securityToken);\r",
+							"\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "text/xml; charset=utf-8"
+					},
+					{
+						"key": "SOAPAction",
+						"value": "http://webservices.amadeus.com/ACSFRQ_16_1_1A"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:sec=\"http://xml.amadeus.com/2010/06/Security_v1\" xmlns:link=\"http://wsdl.amadeus.com/2010/06/ws/Link_v1\" xmlns:ses=\"http://xml.amadeus.com/2010/06/Session_v3\">\n    <soapenv:Header xmlns:wsa=\"http://www.w3.org/2005/08/addressing\" xmlns:typ=\"http://xml.amadeus.com/2010/06/Types_v1\" xmlns:iat=\"http://www.iata.org/IATA/2007/00/IATA2010.1\">\n        <sec:AMA_SecurityHostedUser>\n            <sec:UserID POS_Type=\"1\" RequestorType=\"U\" PseudoCityCode=\"{{LSSOfficeId}}\" AgentDutyCode=\"GS\">\n                <typ:RequestorID>\n                    <iat:CompanyName>{{LSSOrg}}</iat:CompanyName>\n                </typ:RequestorID>\n            </sec:UserID>\n        </sec:AMA_SecurityHostedUser>\n        <wsse:Security xmlns:wsse=\"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd\" xmlns:wsu=\"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd\">\n            <wsse:UsernameToken>\n                <wsse:Username>{{LSSUser}}</wsse:Username>\n                <wsse:Password Type=\"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordDigest\">{{saltedLSSPass}}</wsse:Password>\n                <wsse:Nonce EncodingType=\"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-soap-message-security-1.0#Base64Binary\">{{nonceBase64}}</wsse:Nonce>\n                <wsu:Created>{{timestamp}}</wsu:Created>\n            </wsse:UsernameToken>\n        </wsse:Security>\n        <wsa:To>{{WURI}}/{{WSAP}}</wsa:To>\n        <wsa:Action>http://webservices.amadeus.com/ACSFRQ_16_1_1A</wsa:Action>\n        <wsa:MessageID>urn:uuid:e88e9b9d-7a0f-46e0-8f01-e0cf6325cb67</wsa:MessageID>\n        <link:TransactionFlowLink>\n            <link:Consumer>\n                <link:UniqueID>oef5izfzuaawy3ergzk5005h</link:UniqueID>\n            </link:Consumer>\n        </link:TransactionFlowLink>\n    </soapenv:Header>\n    <soapenv:Body>\n        <DCSLST_GetCheckInSummaryFigures>\n         <legInfo>\n            <carrierDetails>\n               <marketingCarrier>TG</marketingCarrier>\n            </carrierDetails>\n            <flightDetails>\n               <flightNumber>0676</flightNumber>\n            </flightDetails>\n            <departureDate>20240910</departureDate>\n            <boardPoint>BKK</boardPoint>\n         </legInfo>\n      </DCSLST_GetCheckInSummaryFigures>\n    </soapenv:Body>\n</soapenv:Envelope>",
+					"options": {
+						"raw": {
+							"language": "xml"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{WURI}}/{{WSAP}}",
+					"host": [
+						"{{WURI}}"
+					],
+					"path": [
+						"{{WSAP}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

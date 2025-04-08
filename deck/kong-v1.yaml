@@ -1,0 +1,871 @@
+_format_version: "3.0"
+_konnect:
+  control_plane_name: thai-airways-poc
+certificates:
+- cert: |-
+    -----BEGIN CERTIFICATE-----
+    MIIEiDCCAnCgAwIBAgIUO0LYlbyoUTCdek13uui2h/+IbTYwDQYJKoZIhvcNAQEL
+    BQAwRTELMAkGA1UEBhMCQVUxEzARBgNVBAgMClNvbWUtU3RhdGUxITAfBgNVBAoM
+    GEludGVybmV0IFdpZGdpdHMgUHR5IEx0ZDAeFw0yNTA0MDEwNDMyNDRaFw0zMDAz
+    MzEwNDMyNDRaMEUxCzAJBgNVBAYTAkFVMRMwEQYDVQQIDApTb21lLVN0YXRlMSEw
+    HwYDVQQKDBhJbnRlcm5ldCBXaWRnaXRzIFB0eSBMdGQwggEiMA0GCSqGSIb3DQEB
+    AQUAA4IBDwAwggEKAoIBAQDLf2lC5cuW7nSOG4GOAokQgg7vrG22WVPCmAWds+ut
+    o/RqRyUjLqxYY9Z5+L2kchTD+J0kqhPTlxlQLUnvInNZW2iFaZuy/g8xnVlm8TSq
+    PwWWZM6PUfTgBd2r/9PJshr3jvaTw0AIFbxZSpAOyCrsmbWptK0kME20pjtNKNb9
+    Cv68CJdaC8X9YAm+SOZoHXy1vD8oiqlBUfTcEzATBeuy0CQSc85fWO8p/texh50Z
+    aFN5TBt1Whe1zQ713ziYkiExQl9odAtIkS2vQ9B1eyiDKFC3VdPbrsWNJlxPmI6L
+    m34ekC8b/dSR8dINCvjQ/vu1lnx3BCoEAxHlCyndl1PhAgMBAAGjcDBuMB8GA1Ud
+    IwQYMBaAFF1YlHIVpTzjrRSkW8gobMH8XMu+MAkGA1UdEwQCMAAwCwYDVR0PBAQD
+    AgTwMBQGA1UdEQQNMAuCCWxvY2FsaG9zdDAdBgNVHQ4EFgQUoinqrPuIdBMXnV6K
+    Ji+/I55L5DswDQYJKoZIhvcNAQELBQADggIBAB8xxFprT4ZQgdqO0Y8/O8MvpC7J
+    FRiybphW1HfruFYs8H2IwEgW6RUiJu8/OVOR9MW4hAPA7q5GHLIA6L7X87NbwG9i
+    60PImhnZ2Wk0wu7ItPMClEYNF/TcDZgIGfmrvmTlaEZuD0j/nGnfVJb9vW0q0hQH
+    DJm6VorzHrYVKoL2lgDMxkMBufAe4RNwkVtACygiL1NmDrTfTd7K1ul9PvvWuQ0I
+    GP4dekZ0WhgEVdTlS9n9wO6tXgcdB3uf7dN8/3GTOc+l0swPwCOESErBWn0/FAqG
+    Tl8+rRBaA8Z44IHLUUz+5f4EV47fBYl67JCQaeJjqPTy801gnu4BDBFXb0dB+n6R
+    uU1FlDFs5hqTZrHBv4GZOwJZV5CNeNn7zMNHzJMDZ4cbwPCkGVD1vjP7aaxW909U
+    Z5Xoj+lCw5PpTwTTvOvC3zg+ogPzZoGIa2+RCdQBi7tljxmf9frUBQbrrH+gY6u6
+    4t4uW3+9M5HbRlJxcoNnXxIDm73yyBsV3kaAoyYDaCjnsVsJ7x5UMZ66dyE9bTtW
+    lGFuC9TtMPQrlckI7Ce4DtQHL17d7tOETYOV6cY1L1EIvjmGTwDWrQ8UWzcPljmP
+    7yyxlk4IEbwojUk/BxvfX14FsQqMWkZ4Ztv2MV9r81WWOqP9m04reEkSknUWiyQN
+    z3/CHOc9apyvXgFi
+    -----END CERTIFICATE-----
+  id: d29f19e4-682c-4d2b-8540-7a69e23f1445
+  key: |-
+    -----BEGIN PRIVATE KEY-----
+    MIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQDLf2lC5cuW7nSO
+    G4GOAokQgg7vrG22WVPCmAWds+uto/RqRyUjLqxYY9Z5+L2kchTD+J0kqhPTlxlQ
+    LUnvInNZW2iFaZuy/g8xnVlm8TSqPwWWZM6PUfTgBd2r/9PJshr3jvaTw0AIFbxZ
+    SpAOyCrsmbWptK0kME20pjtNKNb9Cv68CJdaC8X9YAm+SOZoHXy1vD8oiqlBUfTc
+    EzATBeuy0CQSc85fWO8p/texh50ZaFN5TBt1Whe1zQ713ziYkiExQl9odAtIkS2v
+    Q9B1eyiDKFC3VdPbrsWNJlxPmI6Lm34ekC8b/dSR8dINCvjQ/vu1lnx3BCoEAxHl
+    Cyndl1PhAgMBAAECggEACDh/8Jdm55R/eeQrkiiRD+0pHE6LahPmudQ5WdsUWMHo
+    VEjGe8rdZH64AdpmEtgW9am782i5f1E50Q7bT0FFhqUWLlmLVCpGQ9tW6r0wwvXj
+    zGULISgO6+PgxhuCG0JKK5kHZgW7tvfl0XedJTO55C/7cj0dx3n6EaOrfpz5PmSa
+    S+8/0ZdoM2Jwuaq7SaDKwNsoGXTFyDxtVtrXCdgT/OFWmwSRcd7x98pqM8mDWHGJ
+    jXXrNRqsAVFrIqWSXHI0VJ8b9DwZX9t6QT5QGiyHntm8iuF8cKmxHohnI9uhkoWX
+    ylhLZQkQcZdFwlszdZM9QYL8UJYAbJOk9JoomcKT3wKBgQD6OQxp5fQ2NDcrRa7h
+    jpFfRbTE9Gue2hO8xsnCbZOyisuNpEwDcVNe3zI4SGqB3IP2pGcy2nZOV/z7giJh
+    A48ZwdGfgTWMMn6jQjZimkvN6+VXqIJqZuGX72+F4YClipFcc4lecpKMxnN2afoN
+    mc19SCLNVRxpLESNxZhCoJx/twKBgQDQMjEkVMoUqjQflbYEPB7DsLoTyu3x4+k3
+    hikw2w1i+x6yVzjQi0IonMJ4bEinmEe3lH+B9glXjrMSbjS+PwssSv4DghiU2Mg4
+    QyDtl2/3S/M1uQGZ4tPfB5fUhO9/l3sjRQFUIpT1QC78YUTcouRxvHoIz2TTyZJf
+    KVlbLvEZJwKBgCnTnXKaQM9KvSoblNcZaM1/Lm951/+OvpvgstswS+8dalc77oTo
+    zaHfN1rXKA6bGOgCpUmH4RzJcn1sTGjhGmuYzXyXMadEzYxmxgaHekJqu0SC44H7
+    vpwSJxc/Ea0aU6AbpAvIpRypE6Xooybg3cuiYkbmgkBGaRM1w3TnuiFTAoGAWUYM
+    eG27MV1CeICzyeEVuAfh4nbTzTNTX7Gxm/dyKA1SPlrUS+hK+Csv4H9eMC9GIVwV
+    yN59ZwQTmUWUbDeQTO/jOBHjBIBoameuiPK02i/BHDo2i4wOGcahvkk6gVWtQZRn
+    W3JwuTFKdIIpCwr2NicBlSGJNJ9smk2auVTJoWUCgYANBqeCx+oYoNSzC20DFWyN
+    A1Swof9xXdw5CNW4mq8sbeKefta8H6XeEIvso9jrYuYEu9SBCrHGdIfKq4GX+DnL
+    trxPNZY8ENBN7YBowf84GtrUMHXS7u1tJPowhWX2e187Y4d78zhjFiyz3Cg0D14I
+    KS/oYocZXPe/BCfQ+KyVVQ==
+    -----END PRIVATE KEY-----
+consumers:
+- basicauth_credentials:
+  - password: 117b9a0a8ab5ba05899e94410ad6d4c186a94213
+    username: CrewKitS_Rest
+  username: CrewKitS_Rest
+- basicauth_credentials:
+  - password: 8668d16e66b3face6247c237545c6a9aae0d3063
+    username: tg_meal
+  username: MealsAPI
+- basicauth_credentials:
+  - password: c9c066972932b35edcb072ad851fc339def4584c
+    username: TB_ROP_COM
+  username: ROPRealtimeWebServices
+- basicauth_credentials:
+  - password: 8b26be017631ef30c5712667a52b1ebf5da109ec
+    username: bm_crm
+  username: bm_crm
+- basicauth_credentials:
+  - password: 7abb207c047e560aa98be8e7fadbfbce1bc867b2
+    username: demouser
+  username: eugene_consumer
+services:
+- connect_timeout: 60000
+  enabled: true
+  host: tsqdev.thaiairways.com
+  name: Crewkit_FlightSchedule
+  plugins:
+  - config:
+      anonymous: null
+      hide_credentials: false
+      realm: service
+    enabled: true
+    name: basic-auth
+    protocols:
+    - grpc
+    - grpcs
+    - http
+    - https
+    - ws
+    - wss
+  port: 8080
+  protocol: http
+  read_timeout: 60000
+  retries: 5
+  routes:
+  - https_redirect_status_code: 426
+    name: Crewkit_FlightSchedule
+    path_handling: v0
+    paths:
+    - /CrewKitServiceREST/services/FlightSchedule
+    preserve_host: false
+    protocols:
+    - http
+    - https
+    regex_priority: 0
+    request_buffering: true
+    response_buffering: true
+    strip_path: false
+  write_timeout: 60000
+- connect_timeout: 60000
+  enabled: true
+  host: SAIPUCN6.thaiairways.co.th
+  name: DCS_Listing_PAX_PDT
+  plugins:
+  - config:
+      access:
+      - "local http = require \"resty.http\"\n\nreturn function()\n    -- Get raw
+        request body\n    local raw_body = kong.request.get_raw_body()\n    \n    --
+        Validate payload exists\n    if not raw_body or raw_body == \"\" then\n        kong.response.exit(400,
+        { message = \"Empty payload: XML body required\" })\n    end\n\n    -- Extract
+        Nonce\n    local nonce = raw_body:match(\"<wsse:Nonce.-[^>]*>(.-)</wsse:Nonce>\")\n
+        \   if not nonce then\n        kong.response.exit(400, {\n            message
+        = \"Validation failed\",\n            error = \"Missing or malformed wsse:Nonce\"\n
+        \       })\n    end\n\n    -- Extract departureDate\n    local departure_date
+        = raw_body:match(\"<v1:departureDate>(.-)</v1:departureDate>\")\n    if not
+        departure_date then\n        kong.response.exit(400, {\n            message
+        = \"Validation failed\",\n            error = \"Missing or malformed v1:departureDate\"\n
+        \       })\n    end\n\n    -- Store in context for potential downstream use\n
+        \   kong.ctx.shared.nonce = nonce\n    kong.ctx.shared.departure_date = departure_date\n\n
+        \   -- Create HTTP client\n    local httpc = http.new()\n    \n    -- Build
+        URL with parameters\n    local url = \"https://sfp8q4jp-5000.asse.devtunnels.ms/check-flight\"
+        ..\n        \"?nonce=\" .. kong.util.encode_uri(nonce) ..\n        \"&departure_date=\"
+        .. kong.util.encode_uri(departure_date)\n\n    -- Execute the callout\n    local
+        res, err = httpc:request_uri(url, {\n        method = \"GET\",\n        ssl_verify
+        = false  -- Consider enabling SSL verification for production\n    })\n\n
+        \   -- Handle callout errors\n    if not res then\n        kong.log.err(\"Callout
+        failed: \", err)\n        return kong.response.exit(500, { message = \"Validation
+        service unavailable\" })\n    end\n\n    -- Check response status\n    if
+        res.status >= 400 then\n        kong.log.warn(\"Validation failed with status:
+        \", res.status)\n        return kong.response.exit(400, { \n            message
+        = \"Flight validation failed\",\n            status = res.status,\n            body
+        = res.body\n        })\n    end\n\n    -- Optional: Store validation response
+        for downstream use\n    kong.ctx.shared.validation_response = {\n        status
+        = res.status,\n        body = res.body,\n        headers = res.headers\n    }\nend"
+      body_filter: []
+      certificate: []
+      functions: []
+      header_filter: []
+      log: []
+      rewrite: []
+      ws_client_frame: []
+      ws_close: []
+      ws_handshake: []
+      ws_upstream_frame: []
+    enabled: false
+    name: pre-function
+    protocols:
+    - grpc
+    - grpcs
+    - http
+    - https
+  - config:
+      cache:
+        cache_ttl: 300
+        memory:
+          dictionary_name: kong_db_cache
+        redis:
+          cluster_addresses: null
+          cluster_max_redirections: 5
+          cluster_nodes: null
+          connect_timeout: 2000
+          connection_is_proxied: false
+          database: 0
+          host: 127.0.0.1
+          keepalive_backlog: null
+          keepalive_pool_size: 256
+          password: null
+          port: 6379
+          read_timeout: 2000
+          send_timeout: 2000
+          sentinel_addresses: null
+          sentinel_master: null
+          sentinel_nodes: null
+          sentinel_password: null
+          sentinel_role: null
+          sentinel_username: null
+          server_name: null
+          ssl: false
+          ssl_verify: false
+          timeout: 2000
+          username: null
+        strategy: "off"
+      callouts:
+      - cache:
+          bypass: false
+        depends_on: []
+        name: validation_service
+        request:
+          body:
+            custom: {}
+            decode: false
+            forward: false
+          by_lua: |-
+            local raw_body = kong.request.get_raw_body()
+
+            -- kong.log.err("Raw Body: ", raw_body or "nil")
+
+            -- Validate payload exists
+            if not raw_body or raw_body == "" then
+                kong.response.exit(400, { message = "Empty payload: XML body required" })
+            end
+
+            -- Extract Nonce
+            local nonce = raw_body:match("<wsse:Nonce.-[^>]*>(.-)</wsse:Nonce>")
+            -- kong.log.err(nonce)
+            if not nonce then
+                kong.response.exit(400, {
+                    message = "Validation failed",
+                    error = "Missing or malformed wsse:Nonce"
+                })
+            end
+
+            local created_date = raw_body:match("<wsu:Created.-%>(.-)</wsu:Created>")
+            if not created_date then
+                kong.response.exit(400, {
+                    message = "Validation failed",
+                    error = "Missing or malformed <wsu:Created>"
+                })
+            end
+
+            -- kong.ctx.shared.nonce = nonce
+            -- kong.ctx.shared.departure_date = departure_date
+
+            -- local uri = "https://sfp8q4jp-5000.asse.devtunnels.ms/check?nonce=" ..
+            --    nonce ..
+            --    "&created_date=" .. departure_date
+
+            -- kong.log.err(uri)
+
+            kong.ctx.shared.callouts.validation_service.request.params.url =
+                "https://sfp8q4jp-5000.asse.devtunnels.ms/check?nonce=" ..
+                nonce ..
+                "&created_date=" .. created_date
+          error:
+            error_response_code: 400
+            error_response_msg: service callout error
+            http_statuses: null
+            on_error: fail
+            retries: 2
+          headers:
+            custom: null
+            forward: false
+          http_opts:
+            proxy: null
+            ssl_server_name: null
+            ssl_verify: false
+            timeouts: null
+          method: GET
+          query:
+            custom: {}
+            forward: false
+          url: https://sfp8q4jp-5000.asse.devtunnels.ms/check
+        response:
+          body:
+            decode: true
+            store: true
+          by_lua: null
+          headers:
+            store: true
+      upstream:
+        body:
+          custom: {}
+          decode: true
+          forward: true
+        by_lua: |-
+          local status = kong.ctx.shared.callouts.validation_service.response.status
+          if status >= 400 then
+                local soap_fault = [[
+              <soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+                <soap:Body>
+                  <soap:Fault>
+                    <faultcode>soap:Client</faultcode>
+                    <faultstring>Invalid SOAP payload</faultstring>
+                    <detail>
+                      The SOAP payload could not be validated due to incorrect structure or content.
+                    </detail>
+                  </soap:Fault>
+                </soap:Body>
+              </soap:Envelope>
+            ]]
+
+            return kong.response.exit(status, soap_fault, {
+              ["Content-Type"] = "text/xml; charset=utf-8"
+            })
+          end
+        headers:
+          custom: null
+          forward: true
+        query:
+          custom: null
+          forward: true
+    enabled: true
+    name: request-callout
+    protocols:
+    - grpc
+    - grpcs
+    - http
+    - https
+  port: 8121
+  protocol: http
+  read_timeout: 60000
+  retries: 5
+  routes:
+  - https_redirect_status_code: 426
+    name: DCS_Listing_PAX_PDT
+    path_handling: v0
+    paths:
+    - /dcs/listing/pax
+    plugins:
+    - config:
+        anonymous: null
+        hide_credentials: false
+        realm: service
+      enabled: true
+      name: basic-auth
+      protocols:
+      - grpc
+      - grpcs
+      - http
+      - https
+      - ws
+      - wss
+    preserve_host: false
+    protocols:
+    - http
+    - https
+    regex_priority: 0
+    request_buffering: true
+    response_buffering: true
+    strip_path: false
+  write_timeout: 60000
+- connect_timeout: 60000
+  enabled: true
+  host: tsqdev.thaiairways.com
+  name: EStaff-Service
+  plugins:
+  - config:
+      allow:
+      - 10.32.160.0/21
+      deny: []
+      message: null
+      status: null
+    enabled: true
+    name: ip-restriction
+    protocols:
+    - grpc
+    - grpcs
+    - http
+    - https
+    - tcp
+    - tls
+  port: 8080
+  protocol: http
+  read_timeout: 60000
+  retries: 5
+  routes:
+  - https_redirect_status_code: 426
+    name: EstaffService
+    path_handling: v0
+    paths:
+    - /EstrService/WsEstrInterface
+    preserve_host: false
+    protocols:
+    - http
+    - https
+    regex_priority: 0
+    request_buffering: true
+    response_buffering: true
+    strip_path: false
+  write_timeout: 60000
+- connect_timeout: 60000
+  enabled: true
+  host: nodeA1.test.webservices.amadeus.com
+  name: GetPassengerList
+  port: 443
+  protocol: https
+  read_timeout: 60000
+  retries: 5
+  routes:
+  - https_redirect_status_code: 426
+    name: GetPassengerList
+    path_handling: v0
+    paths:
+    - /1ASIWDA2TG
+    preserve_host: false
+    protocols:
+    - http
+    - https
+    regex_priority: 0
+    request_buffering: true
+    response_buffering: true
+    strip_path: false
+  write_timeout: 60000
+- connect_timeout: 60000
+  enabled: true
+  host: www.thaiairways.com
+  name: Meals_API
+  port: 443
+  protocol: https
+  read_timeout: 60000
+  retries: 5
+  routes:
+  - https_redirect_status_code: 426
+    name: getMealList
+    path_handling: v0
+    paths:
+    - /app/pre_select_meals/getMealList
+    plugins:
+    - config:
+        anonymous: null
+        hide_credentials: false
+        realm: service
+      enabled: true
+      name: basic-auth
+      protocols:
+      - grpc
+      - grpcs
+      - http
+      - https
+      - ws
+      - wss
+    preserve_host: false
+    protocols:
+    - http
+    - https
+    regex_priority: 0
+    request_buffering: true
+    response_buffering: true
+    strip_path: false
+  write_timeout: 60000
+- connect_timeout: 60000
+  enabled: true
+  host: sit-tsq.thaiairways.com
+  name: MyIDTravelPayment
+  port: 443
+  protocol: https
+  read_timeout: 60000
+  retries: 5
+  routes:
+  - https_redirect_status_code: 426
+    name: MyIDTravelPayment-PaymentInterface
+    path_handling: v0
+    paths:
+    - /PaymentMyIdTravel/PaymentInterfaceServicePortType
+    preserve_host: false
+    protocols:
+    - http
+    - https
+    regex_priority: 0
+    request_buffering: true
+    response_buffering: true
+    strip_path: false
+  write_timeout: 60000
+- connect_timeout: 60000
+  enabled: true
+  host: tgpaymentuat.2c2p.com
+  name: MyIDTravelPayment-Payment
+  port: 443
+  protocol: https
+  read_timeout: 60000
+  retries: 5
+  routes:
+  - https_redirect_status_code: 426
+    name: MyIDTravelPayment-Payment
+    path_handling: v0
+    paths:
+    - /PaymentProcess/Service.asmx
+    preserve_host: false
+    protocols:
+    - http
+    - https
+    regex_priority: 0
+    request_buffering: true
+    response_buffering: true
+    strip_path: false
+  write_timeout: 60000
+- connect_timeout: 60000
+  enabled: true
+  host: 172.24.84.5
+  name: ROPRealtimeWebServices
+  plugins:
+  - config:
+      anonymous: null
+      hide_credentials: false
+      realm: service
+    enabled: true
+    name: basic-auth
+    protocols:
+    - grpc
+    - grpcs
+    - http
+    - https
+    - ws
+    - wss
+  - config:
+      cache:
+        cache_ttl: 300
+        memory:
+          dictionary_name: kong_db_cache
+        redis:
+          cluster_addresses: null
+          cluster_max_redirections: 5
+          cluster_nodes: null
+          connect_timeout: 2000
+          connection_is_proxied: false
+          database: 0
+          host: 127.0.0.1
+          keepalive_backlog: null
+          keepalive_pool_size: 256
+          password: null
+          port: 6379
+          read_timeout: 2000
+          send_timeout: 2000
+          sentinel_addresses: null
+          sentinel_master: null
+          sentinel_nodes: null
+          sentinel_password: null
+          sentinel_role: null
+          sentinel_username: null
+          server_name: null
+          ssl: false
+          ssl_verify: false
+          timeout: 2000
+          username: null
+        strategy: "off"
+      callouts:
+      - cache:
+          bypass: false
+        depends_on: []
+        name: validation_service
+        request:
+          body:
+            custom: {}
+            decode: false
+            forward: false
+          by_lua: |-
+            local raw_body = kong.request.get_raw_body()
+
+            -- kong.log.err("Raw Body: ", raw_body or "nil")
+
+            -- Validate payload exists
+            if not raw_body or raw_body == "" then
+                kong.response.exit(400, { message = "Empty payload: XML body required" })
+            end
+
+            -- Extract Nonce
+            local nonce = raw_body:match("<wsse:Nonce.-[^>]*>(.-)</wsse:Nonce>")
+            -- kong.log.err(nonce)
+            if not nonce then
+                kong.response.exit(400, {
+                    message = "Validation failed",
+                    error = "Missing or malformed wsse:Nonce"
+                })
+            end
+
+            local created_date = raw_body:match("<wsu:Created.-%>(.-)</wsu:Created>")
+            if not created_date then
+                kong.response.exit(400, {
+                    message = "Validation failed",
+                    error = "Missing or malformed <wsu:Created>"
+                })
+            end
+
+            -- kong.ctx.shared.nonce = nonce
+            -- kong.ctx.shared.departure_date = departure_date
+
+            -- local uri = "https://sfp8q4jp-5000.asse.devtunnels.ms/check?nonce=" ..
+            --    nonce ..
+            --    "&created_date=" .. departure_date
+
+            -- kong.log.err(uri)
+
+            kong.ctx.shared.callouts.validation_service.request.params.url =
+                "https://sfp8q4jp-5000.asse.devtunnels.ms/check?nonce=" ..
+                nonce ..
+                "&created_date=" .. created_date
+          error:
+            error_response_code: 400
+            error_response_msg: service callout error
+            http_statuses: null
+            on_error: fail
+            retries: 2
+          headers:
+            custom: null
+            forward: false
+          http_opts:
+            proxy: null
+            ssl_server_name: null
+            ssl_verify: false
+            timeouts: null
+          method: GET
+          query:
+            custom: null
+            forward: false
+          url: https://sfp8q4jp-5000.asse.devtunnels.ms/check
+        response:
+          body:
+            decode: false
+            store: true
+          by_lua: null
+          headers:
+            store: true
+      upstream:
+        body:
+          custom: null
+          decode: true
+          forward: true
+        by_lua: |-
+          local status = kong.ctx.shared.callouts.validation_service.response.status
+          if status >= 400 then
+                local soap_fault = [[
+              <soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+                <soap:Body>
+                  <soap:Fault>
+                    <faultcode>soap:Client</faultcode>
+                    <faultstring>Invalid SOAP payload</faultstring>
+                    <detail>
+                      The SOAP payload could not be validated due to incorrect structure or content.
+                    </detail>
+                  </soap:Fault>
+                </soap:Body>
+              </soap:Envelope>
+            ]]
+
+            return kong.response.exit(status, soap_fault, {
+              ["Content-Type"] = "text/xml; charset=utf-8"
+            })
+          end
+        headers:
+          custom: null
+          forward: true
+        query:
+          custom: null
+          forward: true
+    enabled: true
+    name: request-callout
+    protocols:
+    - grpc
+    - grpcs
+    - http
+    - https
+  port: 64080
+  protocol: http
+  read_timeout: 60000
+  retries: 5
+  routes:
+  - https_redirect_status_code: 426
+    name: ROPRealtimeWebServices
+    path_handling: v0
+    paths:
+    - /tgropweb/ROPWebServicesService/ROPRealTimeServicesService
+    preserve_host: false
+    protocols:
+    - http
+    - https
+    regex_priority: 0
+    request_buffering: true
+    response_buffering: true
+    strip_path: false
+  write_timeout: 60000
+- connect_timeout: 60000
+  enabled: true
+  host: thaiairway2--tgsandbox.sandbox.my.salesforce.com
+  name: Salesforce_UpsertPassenger
+  path: /services/apexrest/UpsertPassenger
+  plugins:
+  - config:
+      add:
+        body: []
+        headers: []
+        json_types: []
+        querystring: []
+      allow:
+        body: null
+      append:
+        body: []
+        headers: []
+        json_types: []
+        querystring: []
+      dots_in_keys: true
+      http_method: null
+      remove:
+        body: []
+        headers: []
+        querystring: []
+      rename:
+        body: []
+        headers: []
+        querystring: []
+      replace:
+        body: []
+        headers:
+        - 'Host: thaiairway2--tgsandbox.sandbox.my.salesforce.com'
+        json_types: []
+        querystring: []
+        uri: null
+    enabled: true
+    name: request-transformer-advanced
+    protocols:
+    - grpc
+    - grpcs
+    - http
+    - https
+  port: 443
+  protocol: https
+  read_timeout: 60000
+  retries: 5
+  routes:
+  - https_redirect_status_code: 426
+    name: Salesforce_UpsertPassenger
+    path_handling: v0
+    paths:
+    - /services/apexrest/UpsertPassenger
+    preserve_host: false
+    protocols:
+    - http
+    - https
+    regex_priority: 0
+    request_buffering: true
+    response_buffering: true
+    strip_path: true
+  write_timeout: 60000
+- connect_timeout: 60000
+  enabled: true
+  host: tsqdev.thaiairways.com
+  name: TGPutAODBTGFlightUpdate
+  plugins:
+  - config:
+      access:
+      - "local function validate_payload()\n    local raw_body = kong.request.get_raw_body()\n
+        \   \n    -- Validate payload exists\n    if not raw_body or raw_body == \"\"
+        then\n        kong.response.exit(400, { message = \"Empty payload: XML body
+        required\" })\n    end\n\n    -- Define validation requirements\n    local
+        validation_checks = {\n        {\n            pattern = \"soapenv:Envelope\",\n
+        \           error = \"Missing SOAP envelope declaration\"\n        },\n        {\n
+        \           pattern = \"soapenv:Body\",\n            error = \"Missing SOAP
+        body section\"\n        },\n        {\n            pattern = \"inc:updateFlightInformation\",\n
+        \           error = \"Missing updateFlightInformation operation\"\n        },\n
+        \       {\n            pattern = \"&lt;FlightScheduleUpdate&gt;\",\n            error
+        = \"Missing FlightScheduleUpdate root element\"\n        },\n        {\n            pattern
+        = \"&lt;HeaderData&gt;.-&lt;/HeaderData&gt;\",\n            error = \"Invalid
+        HeaderData section\"\n        },\n        {\n            pattern = \"&lt;MessageData&gt;.-&lt;/MessageData&gt;\",\n
+        \           error = \"Invalid MessageData section\"\n        },\n        --
+        Required field patterns\n        {\n            pattern = \"&lt;ADID&gt;.-&lt;/ADID&gt;\",\n
+        \           error = \"Missing ADID (Aircraft ID)\"\n        },\n        {\n
+        \           pattern = \"&lt;FLNO&gt;.-&lt;/FLNO&gt;\",\n            error
+        = \"Missing FLNO (Flight Number)\"\n        },\n    }\n\n    -- Execute validation
+        checks\n    for _, check in ipairs(validation_checks) do\n        if not raw_body:find(check.pattern)
+        then\n            kong.response.exit(400, { \n                message = \"Validation
+        failed\",\n                error = check.error,\n                required_pattern
+        = check.pattern\n            })\n        end\n    end\nend\n\n-- Execute validation\nvalidate_payload()"
+      body_filter: []
+      certificate: []
+      functions: []
+      header_filter: []
+      log: []
+      rewrite: []
+      ws_client_frame: []
+      ws_close: []
+      ws_handshake: []
+      ws_upstream_frame: []
+    enabled: true
+    instance_name: XML-Validate
+    name: pre-function
+    protocols:
+    - grpc
+    - grpcs
+    - http
+    - https
+  port: 80
+  protocol: http
+  read_timeout: 60000
+  retries: 5
+  routes:
+  - https_redirect_status_code: 426
+    name: TGPutAODBTGFlightUpdate
+    path_handling: v0
+    paths:
+    - /AIMSInterface/TG_PutAODBTGFlightUpdateService/TG_PutAODBTGFlightUpdateServiceImpl
+    preserve_host: false
+    protocols:
+    - http
+    - https
+    regex_priority: 0
+    request_buffering: true
+    response_buffering: true
+    strip_path: false
+  write_timeout: 60000
+- connect_timeout: 60000
+  enabled: true
+  host: test.salesforce.com
+  name: salesforce-api
+  port: 443
+  protocol: https
+  read_timeout: 60000
+  retries: 5
+  routes:
+  - https_redirect_status_code: 426
+    name: CRM_SalesforceLogin
+    path_handling: v0
+    paths:
+    - /services/oauth2/token
+    plugins:
+    - config:
+        anonymous: null
+        hide_credentials: false
+        realm: service
+      enabled: true
+      name: basic-auth
+      protocols:
+      - grpc
+      - grpcs
+      - http
+      - https
+      - ws
+      - wss
+    preserve_host: false
+    protocols:
+    - http
+    - https
+    regex_priority: 0
+    request_buffering: true
+    response_buffering: true
+    strip_path: false
+  write_timeout: 60000
+- connect_timeout: 60000
+  enabled: true
+  host: httpbin.org
+  name: sample-api
+  path: /anything
+  port: 443
+  protocol: https
+  read_timeout: 60000
+  retries: 5
+  routes:
+  - https_redirect_status_code: 426
+    name: sample-api-endpoint
+    path_handling: v0
+    paths:
+    - /kong/thaiairways
+    preserve_host: false
+    protocols:
+    - http
+    - https
+    regex_priority: 0
+    request_buffering: true
+    response_buffering: true
+    strip_path: true
+  write_timeout: 60000
