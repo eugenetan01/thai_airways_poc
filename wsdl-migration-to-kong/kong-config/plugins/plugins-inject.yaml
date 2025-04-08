@@ -8,8 +8,6 @@ add-plugins:
         config:
           hide_credentials: true
           anonymous: ""
-        service:
-          tags: ["gitops"]
         tags: ["gitops"]
 
       - name: request-callout
@@ -177,6 +175,4 @@ add-plugins:
           - grpcs
           - http
           - https
-        service:
-          tags: ["gitops"]
         tags: ["gitops"]

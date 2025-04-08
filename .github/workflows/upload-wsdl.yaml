@@ -72,7 +72,7 @@ jobs:
 
       - name: Validate Kong config
         run: |
-          deck validate -s kong.yaml
+          deck file validate kong.yaml
 
       - name: Deploy to Kong Gateway
         run: |
