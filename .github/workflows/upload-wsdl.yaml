@@ -68,7 +68,7 @@ jobs:
         run: deck file openapi2kong --spec ./openapi.yaml --output-file ./kong.yaml --select-tag gitops
 
       - name: Add custom plugin + basic auth plugin
-        run: deck file add-plugins -s ./kong.yaml ./wsdl-migration-to-kong/kong-config/plugins/plugins-inject.yaml
+        run: deck file add-plugins -s ./kong.yaml -o ./kong.yaml ./wsdl-migration-to-kong/kong-config/plugins/plugins-inject.yaml
 
       - name: Validate Kong config
         run: |
