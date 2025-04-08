@@ -1,0 +1,422 @@
+{
+	"info": {
+		"_postman_id": "556d7374-0000-4a25-8a85-1a13e15d340a",
+		"name": "ROPRealTimeServicesService",
+		"description": "\n",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "37393587"
+	},
+	"item": [
+		{
+			"name": "getMainMemberProfile",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "text/xml; charset=utf-8"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Body>\n    <getMainMemberProfile>\n      <getMainMemberProfileRQ>string</getMainMemberProfileRQ>\n    </getMainMemberProfile>\n  </soap:Body>\n</soap:Envelope>\n",
+					"options": {
+						"raw": {
+							"language": "xml"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://10.80.228.23:8000/getMainMemberProfile",
+					"protocol": "http",
+					"host": [
+						"10",
+						"80",
+						"228",
+						"23"
+					],
+					"port": "8000",
+					"path": [
+						"getMainMemberProfile"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "getMainMemberProfile response",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml; charset=utf-8"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Body>\n    <getMainMemberProfile>\n      <getMainMemberProfileRQ>string</getMainMemberProfileRQ>\n    </getMainMemberProfile>\n  </soap:Body>\n</soap:Envelope>\n",
+							"options": {
+								"raw": {
+									"language": "xml"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://57.59.37.29:80/tgropweb/ROPRealTimeServices",
+							"protocol": "http",
+							"host": [
+								"57",
+								"59",
+								"37",
+								"29"
+							],
+							"port": "80",
+							"path": [
+								"tgropweb",
+								"ROPRealTimeServices"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "xml",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "text/xml; charset=utf-8"
+						}
+					],
+					"cookie": [],
+					"body": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Body>\n    <getMainMemberProfileResponse>\n      <getMainMemberProfileReturn>string</getMainMemberProfileReturn>\n    </getMainMemberProfileResponse>\n  </soap:Body>\n</soap:Envelope>\n"
+				}
+			]
+		},
+		{
+			"name": "updateAdditionalMemberProfile",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "text/xml; charset=utf-8"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Body>\n    <updateAdditionalMemberProfile>\n      <updateAdditionalMemberProfileRQ>string</updateAdditionalMemberProfileRQ>\n    </updateAdditionalMemberProfile>\n  </soap:Body>\n</soap:Envelope>\n",
+					"options": {
+						"raw": {
+							"language": "xml"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{ROPRealTimeServicesBaseUrl}}/ROPRealTimeServices",
+					"host": [
+						"{{ROPRealTimeServicesBaseUrl}}"
+					],
+					"path": [
+						"ROPRealTimeServices"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "updateAdditionalMemberProfile response",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml; charset=utf-8"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Body>\n    <updateAdditionalMemberProfile>\n      <updateAdditionalMemberProfileRQ>string</updateAdditionalMemberProfileRQ>\n    </updateAdditionalMemberProfile>\n  </soap:Body>\n</soap:Envelope>\n",
+							"options": {
+								"raw": {
+									"language": "xml"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://57.59.37.29:80/tgropweb/ROPRealTimeServices",
+							"protocol": "http",
+							"host": [
+								"57",
+								"59",
+								"37",
+								"29"
+							],
+							"port": "80",
+							"path": [
+								"tgropweb",
+								"ROPRealTimeServices"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "xml",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "text/xml; charset=utf-8"
+						}
+					],
+					"cookie": [],
+					"body": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Body>\n    <updateAdditionalMemberProfileResponse>\n      <updateAdditionalMemberProfileReturn>string</updateAdditionalMemberProfileReturn>\n    </updateAdditionalMemberProfileResponse>\n  </soap:Body>\n</soap:Envelope>\n"
+				}
+			]
+		},
+		{
+			"name": "updateMemberProfile",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "text/xml; charset=utf-8"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Body>\n    <updateMemberProfile>\n      <updateMemberProfileRQ>string</updateMemberProfileRQ>\n    </updateMemberProfile>\n  </soap:Body>\n</soap:Envelope>\n",
+					"options": {
+						"raw": {
+							"language": "xml"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{ROPRealTimeServicesBaseUrl}}/updateAdditionalMemberProfile",
+					"host": [
+						"{{ROPRealTimeServicesBaseUrl}}"
+					],
+					"path": [
+						"updateAdditionalMemberProfile"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "updateMemberProfile response",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml; charset=utf-8"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Body>\n    <updateMemberProfile>\n      <updateMemberProfileRQ>string</updateMemberProfileRQ>\n    </updateMemberProfile>\n  </soap:Body>\n</soap:Envelope>\n",
+							"options": {
+								"raw": {
+									"language": "xml"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://57.59.37.29:80/tgropweb/ROPRealTimeServices",
+							"protocol": "http",
+							"host": [
+								"57",
+								"59",
+								"37",
+								"29"
+							],
+							"port": "80",
+							"path": [
+								"tgropweb",
+								"ROPRealTimeServices"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "xml",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "text/xml; charset=utf-8"
+						}
+					],
+					"cookie": [],
+					"body": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Body>\n    <updateMemberProfileResponse>\n      <updateMemberProfileReturn>string</updateMemberProfileReturn>\n    </updateMemberProfileResponse>\n  </soap:Body>\n</soap:Envelope>\n"
+				}
+			]
+		},
+		{
+			"name": "getAdditionalMemberProfile",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "text/xml; charset=utf-8"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Body>\n    <getAdditionalMemberProfile>\n      <getAdditionalMemberProfileRQ>string</getAdditionalMemberProfileRQ>\n    </getAdditionalMemberProfile>\n  </soap:Body>\n</soap:Envelope>\n",
+					"options": {
+						"raw": {
+							"language": "xml"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{ROPRealTimeServicesBaseUrl}}/ROPRealTimeServices",
+					"host": [
+						"{{ROPRealTimeServicesBaseUrl}}"
+					],
+					"path": [
+						"ROPRealTimeServices"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "getAdditionalMemberProfile response",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml; charset=utf-8"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Body>\n    <getAdditionalMemberProfile>\n      <getAdditionalMemberProfileRQ>string</getAdditionalMemberProfileRQ>\n    </getAdditionalMemberProfile>\n  </soap:Body>\n</soap:Envelope>\n",
+							"options": {
+								"raw": {
+									"language": "xml"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://57.59.37.29:80/tgropweb/ROPRealTimeServices",
+							"protocol": "http",
+							"host": [
+								"57",
+								"59",
+								"37",
+								"29"
+							],
+							"port": "80",
+							"path": [
+								"tgropweb",
+								"ROPRealTimeServices"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "xml",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "text/xml; charset=utf-8"
+						}
+					],
+					"cookie": [],
+					"body": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Body>\n    <getAdditionalMemberProfileResponse>\n      <getAdditionalMemberProfileReturn>string</getAdditionalMemberProfileReturn>\n    </getAdditionalMemberProfileResponse>\n  </soap:Body>\n</soap:Envelope>\n"
+				}
+			]
+		},
+		{
+			"name": "enrollROPMember",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "text/xml; charset=utf-8"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Body>\n    <enrollROPMember>\n      <enrollROPMemberRQ>string</enrollROPMemberRQ>\n    </enrollROPMember>\n  </soap:Body>\n</soap:Envelope>\n",
+					"options": {
+						"raw": {
+							"language": "xml"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{ROPRealTimeServicesBaseUrl}}/ROPRealTimeServices",
+					"host": [
+						"{{ROPRealTimeServicesBaseUrl}}"
+					],
+					"path": [
+						"ROPRealTimeServices"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "enrollROPMember response",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml; charset=utf-8"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Body>\n    <enrollROPMember>\n      <enrollROPMemberRQ>string</enrollROPMemberRQ>\n    </enrollROPMember>\n  </soap:Body>\n</soap:Envelope>\n",
+							"options": {
+								"raw": {
+									"language": "xml"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://57.59.37.29:80/tgropweb/ROPRealTimeServices",
+							"protocol": "http",
+							"host": [
+								"57",
+								"59",
+								"37",
+								"29"
+							],
+							"port": "80",
+							"path": [
+								"tgropweb",
+								"ROPRealTimeServices"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "xml",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "text/xml; charset=utf-8"
+						}
+					],
+					"cookie": [],
+					"body": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Body>\n    <enrollROPMemberResponse>\n      <enrollROPMemberReturn>string</enrollROPMemberReturn>\n    </enrollROPMemberResponse>\n  </soap:Body>\n</soap:Envelope>\n"
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "ROPRealTimeServicesBaseUrl",
+			"value": "http://57.59.37.29:80",
+			"type": "any"
+		},
+		{
+			"key": "kong_proxy",
+			"value": "http://10.80.228.23:8000"
+		}
+	]
+}
