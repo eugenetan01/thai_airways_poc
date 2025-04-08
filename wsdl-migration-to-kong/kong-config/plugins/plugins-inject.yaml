@@ -7,7 +7,6 @@ add-plugins:
         enabled: true
         config:
           hide_credentials: true
-          anonymous: ""
         tags: ["gitops"]
 
       - name: request-callout
